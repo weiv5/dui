@@ -1,6 +1,8 @@
 define([
-    "../../core"
-], function(Dui) {
+    "../../core",
+    "./header",
+    "./body"
+], function(Dui, Header, Body) {
     function Table() {
         this.init.apply(this, arguments);
     }
