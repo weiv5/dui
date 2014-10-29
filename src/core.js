@@ -2,8 +2,9 @@ define([
     "./format",
     "./css",
     "./var",
-    "./dom"
-], function(Format, Css, Var, Dom) {
+    "./dom",
+    "./error"
+], function(Format, Css, Var, Dom, Err) {
     var dui = function() {};
     dui.extend = dui.prototype.extend = function(obj) {
         for (var i in obj) {
@@ -14,6 +15,7 @@ define([
         dom : Dom,
         css : Css,
         var : Var,
+        error : Err,
         format : Format,
         isArray: Array.isArray,
         inArray: function(el, arr) {
@@ -31,6 +33,9 @@ define([
         isNumber: function(obj) {
             return !dui.isArray(obj) && (obj-parseFloat(obj)+1)>=0;
         },
+        isString: function(obj) {
+            return toString.call(obj) === '[object String]';
+        }
     });
     return dui;
 });

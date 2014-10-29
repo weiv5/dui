@@ -1,14 +1,13 @@
 define([
-    "../../core",
-    "../../dom/dom",
-], function(Dui, Dom, Css) {
+    "../../core"
+], function(Dui) {
     function Header() {
         this.init.apply(this, arguments);
     }
     Header.prototype = {
-        init : function(context, conf) {
+        init : function(box, conf) {
             var me = this;
-            me.context = context;
+            me.box = box;
             me.field = [];
             me.fieldGroupMap = [];
             me.fieldGroupCnt = [];
@@ -42,17 +41,17 @@ define([
         },
         render : function() {
             var me = this;
-            var colgroup = new Dom("colgroup");
-            var thead = new Dom("thead");
-            var tr1 = new Dom("tr");
-            var tr2 = new Dom("tr");
+            var colgroup = new Dui.dom("colgroup");
+            var thead = new Dui.dom("thead");
+            var tr1 = new Dui.dom("tr");
+            var tr2 = new Dui.dom("tr");
             var fieldGroupAppend = [];
             for (var i in me.field) {
-                var col = new Dom("col");
+                var col = new Dui.dom("col");
                 col.attr(width: me.field[i].width);
                 colgroup.append(col);
 
-                var th2 = new Dom("th");
+                var th2 = new Dui.dom("th");
                 th2.text(me.field[i].text);
                 if (me.isFieldGroup) {
                     if (me.field[i].groupId > 0) {
@@ -60,7 +59,7 @@ define([
                         var gid = me.field[i].groupId;
                         if (!Dui.inArray(fieldGroupAppend, gid)) {
                             fieldGroupAppend.push(gid);
-                            var th1 = new Dom("th");
+                            var th1 = new Dui.dom("th");
                             th1.attr("colspan", me.fieldGroupCnt[gid]).text(me.fieldGroupMap[gid]);
                             tr1.append(th1);
                         }
@@ -78,7 +77,8 @@ define([
                 thead.append(t1);
             }
             thead.append(t2);
-            me.context.append({colgroup:colgroup, thead: thead});
+            me.box.append(colgroup);
+            me.box.append(thead);
         },
         bindEvent : function(idx) {
             var me = this;
@@ -89,7 +89,7 @@ define([
                     obj.ord = obj.ord == Dui.var.sort.asc ? Dui.var.sort.desc : Dui.var.sort.asc;
                     var nCls = Dui.css.table.th.sort[obj.ord];
                     obj.dom.removeClass(oCls).addClass(nCls);
-                    me.context.sort(idx, obj.ord);
+                    me.box.sort(idx, obj.ord);
                 });
             }
         },
