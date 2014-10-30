@@ -1,10 +1,10 @@
 define([
     "./format",
-    "./css",
-    "./var",
+    "./error",
     "./dom",
-    "./error"
-], function(Format, Css, Var, Dom, Err) {
+    "./data/css",
+    "./data/var",
+], function(Format, Err, Dom, Css, Var) {
     var dui = function() {};
     dui.extend = dui.prototype.extend = function(obj) {
         for (var i in obj) {

@@ -1,8 +1,6 @@
-define(function() {
-    var ErrCode = {
-        1 : "cannot find container to render"
-    };
-
+define([
+    "./data/errcode"
+], function(ErrCode) {
     function Err(code) {
         var msg = "unkonw error";
         if (typeof ErrCode[code] !== "undefined") {
