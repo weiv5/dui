@@ -21,12 +21,12 @@ require(["table/table"], function(Table) {
                 text : "金额",
                 fieldGroup: "销售",
                 dataIndex : "amount",
-                sum: true
+                isSum: true
             },{
                 text : "数量",
                 fieldGroup: "销售",
                 dataIndex : "count",
-                sort : true
+                sortable : true
             }
         ],
         data : [

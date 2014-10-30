@@ -4,5 +4,6 @@ define(function() {
             desc : "desc",
             asc : "asc"
         },
+        defaultVar : "-"
     };
 });

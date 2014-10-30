@@ -33,7 +33,6 @@ define([
                     order : Dui.var.sort.asc,
                     width : conf[i].width || 100,
                     groupId : groupId,
-                    numSwitch : conf[i].numSwitch || false,
                 });
                 idx++;
             }
