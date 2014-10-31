@@ -1,18 +1,18 @@
 require.config({
     baseUrl: "src/",
     paths: {
-        "jquery": "./lib/jquery",
-        "table" : "./widget/table",
-        "format" : "./format",
-        "dom" : "./dom"
+        "dui" : "./dui",
+        "jquery" : "./lib/jquery"
     },
 });
-require(["table/table"], function(Table) {
-    var option = { 
+require(["dui"], function(Dui) {
+    var option = {
         dataGroup : {
             dataIndex : "brand",
             fieldIndex : 0
         },
+        /*
+        */
         field : [
             {
                 text : "名称",
@@ -21,12 +21,21 @@ require(["table/table"], function(Table) {
                 text : "金额",
                 fieldGroup: "销售",
                 dataIndex : "amount",
+                format : function(num) {
+                    return "RMB"+num;
+                },
                 isSum: true
             },{
                 text : "数量",
                 fieldGroup: "销售",
                 dataIndex : "count",
                 sortable : true
+            },,{
+                text : "金额/数量",
+                fieldGroup: "销售",
+                formula : function(data) {
+                    return data.amount/data.count;
+                }
             }
         ],
         data : [
@@ -52,6 +61,6 @@ require(["table/table"], function(Table) {
                 count : 50,
             },
         ]};
-    var table = new Table("#tbl", option);
+    var table = new Dui.table("#tbl", option);
     table.render();
 });

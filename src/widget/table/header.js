@@ -15,7 +15,7 @@ define([
             for (var i in conf) {
                 var groupId = -1;
                 var idx = 0;
-                if (conf[i].fieldGroup) {
+                if (typeof conf[i].fieldGroup !== "undefined") {
                     var last = Math.max(me.fieldGroupMap.length-1, 0);
                     if (me.fieldGroupMap[last] == conf[i].fieldGroup) {
                         me.fieldGroupCnt[last]++;
@@ -23,7 +23,7 @@ define([
                     } else {
                         me.fieldGroupMap.push(conf[i].fieldGroup);
                         me.fieldGroupCnt.push(1);
-                        groupId = last+1;
+                        groupId = me.fieldGroupMap.length-1;
                     }
                 }
                 me.field.push({
@@ -47,16 +47,16 @@ define([
             var fieldGroupAppend = [];
             for (var i in me.field) {
                 var col = new Dui.dom("col");
-                col.attr(width: me.field[i].width);
+                col.attr("width", me.field[i].width);
                 colgroup.append(col);
 
                 var th2 = new Dui.dom("th");
                 th2.text(me.field[i].text);
                 if (me.isFieldGroup) {
-                    if (me.field[i].groupId > 0) {
+                    if (me.field[i].groupId >= 0) {
                         tr2.append(th2);
                         var gid = me.field[i].groupId;
-                        if (!Dui.inArray(fieldGroupAppend, gid)) {
+                        if (!Dui.inArray(gid, fieldGroupAppend)) {
                             fieldGroupAppend.push(gid);
                             var th1 = new Dui.dom("th");
                             th1.attr("colspan", me.fieldGroupCnt[gid]).text(me.fieldGroupMap[gid]);
@@ -73,9 +73,9 @@ define([
                 me.bindEvent(i);
             }
             if (me.isFieldGroup) {
-                thead.append(t1);
+                thead.append(tr1);
             }
-            thead.append(t2);
+            thead.append(tr2);
             me.box.append(colgroup);
             me.box.append(thead);
         },
@@ -93,4 +93,5 @@ define([
             }
         },
     };
+    return Header;
 });

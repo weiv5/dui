@@ -1,4 +1,4 @@
-define(["./lib/jquery"], function($) {
+define(["jquery"], function($) {
     function Dom() {
         this.init.apply(this, arguments);
     }

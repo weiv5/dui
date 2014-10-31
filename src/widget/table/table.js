@@ -30,5 +30,8 @@ define([
             console.log(col, order);
         },
     };
-    return Table;
+    Dui.extend({
+        table : Table
+    });
+    return Dui;
 });

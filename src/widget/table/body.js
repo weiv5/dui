@@ -32,12 +32,12 @@ define([
                 me.data.push({row: me.formatRow(option.data[i])});
                 if (me.isGroup || me.isSum) {
                     if (me.isGroup) {
-                        var gField = option.field[option.dataGroup.fieldIndex].name;
+                        var gField = option.field[option.dataGroup.fieldIndex].dataIndex;
                         var gValue = option.data[i][option.dataGroup.dataIndex];
                         var idx = tmpMap.indexOf(gValue);
                         if (idx < 0) {
                             tmpMap.push(gValue);
-                            idx = gValue.length-1;
+                            idx = tmpMap.length-1;
                             me.groupData[idx] = {data: {}, sub : []};
                             me.groupData[idx].data[gField] = gValue;
                             me.groupData[idx].sub.push(counter);
@@ -68,9 +68,9 @@ define([
                     var tr = new Dui.dom("tr");
                     var row = me.formatRow(me.groupData[i].data);
                     me.groupData[i].row = row;
-                    for (var i in row) {
+                    for (var j in row) {
                         var td = new Dui.dom("td");
-                        td.text(row[i].format);
+                        td.text(row[j].format);
                         tr.append(td);
                     }
                     me.groupData[i].dom = tr;
@@ -91,6 +91,7 @@ define([
             me.box.append(tbody);
         },
         formatRow : function(data) {
+            var me = this;
             var row = [];
             for (var i in me.field) {
                 var num = Dui.var.defaultVar;
@@ -104,7 +105,7 @@ define([
                     format = me.field[i].format(num);
                 }
                 row.push({format: format, num: num});
-            });
+            }
             return row;
         },
         sort : function(idx, order) {
@@ -112,4 +113,5 @@ define([
         bindEvent : function() {
         },
     };
+    return Body;
 });
