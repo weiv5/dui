@@ -5,13 +5,13 @@ define([
     "./data/css",
     "./data/var",
 ], function(Format, Err, Dom, Css, Var) {
-    var dui = function() {};
-    dui.extend = dui.prototype.extend = function(obj) {
+    var Core = function() {};
+    Core.extend = Core.prototype.extend = function(obj) {
         for (var i in obj) {
             this[i] = obj[i];
         }
     };
-    dui.extend({
+    Core.extend({
         dom : Dom,
         css : Css,
         var : Var,
@@ -19,7 +19,7 @@ define([
         format : Format,
         isArray: Array.isArray,
         inArray: function(el, arr) {
-            if (!dui.isArray(arr)) {
+            if (!Core.isArray(arr)) {
                 return false;
             }
             return arr.indexOf(el)>=0 ? true : false;
@@ -31,11 +31,11 @@ define([
             return true;
         },
         isNumber: function(obj) {
-            return !dui.isArray(obj) && (obj-parseFloat(obj)+1)>=0;
+            return !Core.isArray(obj) && (obj-parseFloat(obj)+1)>=0;
         },
         isString: function(obj) {
             return toString.call(obj) === '[object String]';
         }
     });
-    return dui;
+    return Core;
 });

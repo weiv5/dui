@@ -1,6 +1,6 @@
 define([
     "./core",
     "./widget/table/table",
-], function(Dui) {
-    return Dui;
+], function(Core) {
+    return Core;
 });

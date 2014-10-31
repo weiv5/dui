@@ -22,14 +22,12 @@ require(["dui"], function(Dui) {
                 fieldGroup: "销售",
                 dataIndex : "amount",
                 format : function(num) {
-                    return "RMB"+num;
+                    return "$"+num;
                 },
-                //isSum: true
             },{
                 text : "数量",
                 fieldGroup: "销售",
                 dataIndex : "count",
-                //sortable : true
             },{
                 text : "金额/数量",
                 fieldGroup: "销售",

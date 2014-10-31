@@ -1,6 +1,6 @@
 define([
     "../../core"
-], function(Dui) {
+], function(Core) {
     function Header() {
         this.init.apply(this, arguments);
     }
@@ -30,7 +30,7 @@ define([
                     idx : idx,
                     text : conf[i].text || "",
                     sortable : conf[i].sortable || false,
-                    order : Dui.var.sort.asc,
+                    order : Core.var.sort.asc,
                     width : conf[i].width || 100,
                     groupId : groupId,
                 });
@@ -40,25 +40,25 @@ define([
         },
         render : function() {
             var me = this;
-            var colgroup = new Dui.dom("colgroup");
-            var thead = new Dui.dom("thead");
-            var tr1 = new Dui.dom("tr");
-            var tr2 = new Dui.dom("tr");
+            var colgroup = new Core.dom("colgroup");
+            var thead = new Core.dom("thead");
+            var tr1 = new Core.dom("tr");
+            var tr2 = new Core.dom("tr");
             var fieldGroupAppend = [];
             for (var i in me.field) {
-                var col = new Dui.dom("col");
+                var col = new Core.dom("col");
                 col.attr("width", me.field[i].width);
                 colgroup.append(col);
 
-                var th2 = new Dui.dom("th");
+                var th2 = new Core.dom("th");
                 th2.text(me.field[i].text);
                 if (me.isFieldGroup) {
                     if (me.field[i].groupId >= 0) {
                         tr2.append(th2);
                         var gid = me.field[i].groupId;
-                        if (!Dui.inArray(gid, fieldGroupAppend)) {
+                        if (!Core.inArray(gid, fieldGroupAppend)) {
                             fieldGroupAppend.push(gid);
-                            var th1 = new Dui.dom("th");
+                            var th1 = new Core.dom("th");
                             th1.attr("colspan", me.fieldGroupCnt[gid]).text(me.fieldGroupMap[gid]);
                             tr1.append(th1);
                         }
@@ -84,9 +84,9 @@ define([
             var obj = me.field[idx];
             if (obj.sortable) {
                 obj.dom.bind("click", function() {
-                    var oCls = Dui.css.table.th.sort[obj.ord];
-                    obj.ord = obj.ord == Dui.var.sort.asc ? Dui.var.sort.desc : Dui.var.sort.asc;
-                    var nCls = Dui.css.table.th.sort[obj.ord];
+                    var oCls = Core.css.table.th.sort[obj.ord];
+                    obj.ord = obj.ord == Core.var.sort.asc ? Core.var.sort.desc : Core.var.sort.asc;
+                    var nCls = Core.css.table.th.sort[obj.ord];
                     obj.dom.removeClass(oCls).addClass(nCls);
                     me.box.sort(idx, obj.ord);
                 });

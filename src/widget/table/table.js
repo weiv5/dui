@@ -2,18 +2,18 @@ define([
     "../../core",
     "./header",
     "./body"
-], function(Dui, Header, Body) {
+], function(Core, Header, Body) {
     function Table() {
         this.init.apply(this, arguments);
     }
     Table.prototype = {
         init : function(boxId, option) {
             var me = this;
-            me.box = Dui.dom.get(boxId);
+            me.box = Core.dom.get(boxId);
             if (me.box === null) {
-                Dui.error(1);
+                Core.error(1);
             }
-            me.dom = new Dui.dom("table");
+            me.dom = new Core.dom("table");
             me.header = new Header(me, option.field);
             me.body = new Body(me, option);
         },
@@ -30,8 +30,8 @@ define([
             console.log(col, order);
         },
     };
-    Dui.extend({
+    Core.extend({
         table : Table
     });
-    return Dui;
+    return Core;
 });

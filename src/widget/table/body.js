@@ -1,6 +1,6 @@
 define([
     "../../core"
-], function(Dui) {
+], function(Core) {
     function Body() {
         this.init.apply(this, arguments);
     }
@@ -44,7 +44,7 @@ define([
                         }
                     }
                     for (var j in option.data[i]) {
-                        if (!Dui.isNumber(option.data[i][j])) {
+                        if (!Core.isNumber(option.data[i][j])) {
                             continue;
                         }
                         if (me.isSum) {
@@ -62,14 +62,14 @@ define([
         },
         render : function() {
             var me = this;
-            var tbody = new Dui.dom("tbody");
+            var tbody = new Core.dom("tbody");
             if (me.isGroup) {
                 for (var i in me.groupData) {
-                    var tr = new Dui.dom("tr");
+                    var tr = new Core.dom("tr");
                     var row = me.formatRow(me.groupData[i].data);
                     me.groupData[i].row = row;
                     for (var j in row) {
-                        var td = new Dui.dom("td");
+                        var td = new Core.dom("td");
                         td.text(row[j].format);
                         tr.append(td);
                     }
@@ -78,9 +78,9 @@ define([
                 }
             } else {
                 for (var i in me.data) {
-                    var tr = new Dui.dom("tr");
+                    var tr = new Core.dom("tr");
                     for (var j in me.data[i].row) {
-                        var td = new Dui.dom("td");
+                        var td = new Core.dom("td");
                         td.text(me.data[i].row[j].format);
                         tr.append(td);
                     }
@@ -94,7 +94,7 @@ define([
             var me = this;
             var row = [];
             for (var i in me.field) {
-                var num = Dui.var.defaultVar;
+                var num = Core.var.defaultVar;
                 if (typeof me.field[i].formula === "function") {
                     num = me.field[i].formula(data);
                 } else if (typeof data[me.field[i].dataIndex] !== "undefined") {
