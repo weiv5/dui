@@ -30,11 +30,14 @@ define([
             for (var key in obj) if (_.has(obj, key)) return false;
             return true;
         },
-        isNumber: function(obj) {
+        isNumber : function(obj) {
             return !Core.isArray(obj) && (obj-parseFloat(obj)+1)>=0;
         },
-        isString: function(obj) {
+        isString : function(obj) {
             return toString.call(obj) === '[object String]';
+        },
+        isObject : function(obj) {
+            return toString.call(obj) === '[object Object]';
         }
     });
     return Core;

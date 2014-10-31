@@ -7,11 +7,11 @@ require.config({
 });
 require(["dui"], function(Dui) {
     var option = {
-        /*
         dataGroup : {
             fieldIndex : 0,
             dataIndex : "brand"
         },
+        /*
         */
         field : [
             {

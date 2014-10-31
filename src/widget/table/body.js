@@ -12,9 +12,15 @@ define([
             me.data = [];
             me.groupData = [];
             me.sum = {row:[]};
-            me.isGroup = option.dataGroup || false;
+            me.isGroup = false;
             me.isSum = false;
 
+            if (Core.isObject(option.dataGroup) 
+                && Core.isNumber(option.dataGroup.fieldIndex) 
+                && Core.isString(option.dataGroup.dataIndex)
+                && typeof option.field[option.dataGroup.fieldIndex]!=="undefined") {
+                me.isGroup = true;
+            }
             for (var i in option.field) {
                 me.field.push({
                     numSwitch : option.field[i].numSwitch || false,
