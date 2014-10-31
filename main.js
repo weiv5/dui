@@ -7,11 +7,11 @@ require.config({
 });
 require(["dui"], function(Dui) {
     var option = {
-        dataGroup : {
-            dataIndex : "brand",
-            fieldIndex : 0
-        },
         /*
+        dataGroup : {
+            fieldIndex : 0,
+            dataIndex : "brand"
+        },
         */
         field : [
             {
@@ -24,13 +24,13 @@ require(["dui"], function(Dui) {
                 format : function(num) {
                     return "RMB"+num;
                 },
-                isSum: true
+                //isSum: true
             },{
                 text : "数量",
                 fieldGroup: "销售",
                 dataIndex : "count",
-                sortable : true
-            },,{
+                //sortable : true
+            },{
                 text : "金额/数量",
                 fieldGroup: "销售",
                 formula : function(data) {
@@ -60,7 +60,8 @@ require(["dui"], function(Dui) {
                 amount : 500,
                 count : 50,
             },
-        ]};
+        ]
+    };
     var table = new Dui.table("#tbl", option);
     table.render();
 });

@@ -51,7 +51,7 @@ define([
                             me.sum.data[j] = me.sum.sum[j] || 0;
                             me.sum.data[j] += option.data[i][j];
                         }
-                        if (me.isGroup) {
+                        if (me.isGroup && j!==gField) {
                             me.groupData[idx].data[j] = me.groupData[idx].data[j] || 0;
                             me.groupData[idx].data[j] += option.data[i][j];
                         }
