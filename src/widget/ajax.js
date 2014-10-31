@@ -1,5 +1,5 @@
 define([
-    "./core",
+    "../core",
     "jquery"
 ], function(Core, $) {
     var get = function(url, success, error, timeout) {
