@@ -1,8 +1,8 @@
 define(function() {
     return {
         sort : {
-            desc : "desc",
-            asc : "asc"
+            desc : 1,
+            asc : -1
         },
         defaultVar : "-"
     };

@@ -1,8 +1,8 @@
 define([
     "../../core",
-    "./header",
+    "./head",
     "./body"
-], function(Core, Header, Body) {
+], function(Core, Head, Body) {
     function Table() {
         this.init.apply(this, arguments);
     }
@@ -14,12 +14,12 @@ define([
                 Core.error(1);
             }
             me.dom = new Core.dom("table");
-            me.header = new Header(me, option.field);
+            me.head = new Head(me, option.field);
             me.body = new Body(me, option);
         },
         render : function() {
             var me = this;
-            me.header.render();
+            me.head.render();
             me.body.render();
             me.box.append(me.dom);
         },
@@ -27,7 +27,7 @@ define([
             this.dom.append(child);
         },
         sort : function(col, order) {
-            console.log(col, order);
+            this.body.sort(col, order);
         },
     };
     Core.extend({

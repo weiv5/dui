@@ -39,10 +39,17 @@ define(["jquery"], function($) {
             this.dom.append(el.dom);
             return this;
         },
+        html : function(el) {
+            this.dom.html(el.dom);
+            return this;
+        },
+        empty : function() {
+            this.dom.empty();
+            return this;
+        },
         bind : function(e, deal) {
             this.dom.bind(e, deal);
             return this;
-
         },
         replace : function(target, src) {
             var me = this;
@@ -52,6 +59,9 @@ define(["jquery"], function($) {
             } else {
                 me.append(src);
             }
+        },
+        children : function(idx) {
+            return Dom.get(this.dom.children().eq(idx));
         },
     };
     return Dom;

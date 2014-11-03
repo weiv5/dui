@@ -1,10 +1,10 @@
 define([
     "../../core"
 ], function(Core) {
-    function Header() {
+    function Head() {
         this.init.apply(this, arguments);
     }
-    Header.prototype = {
+    Head.prototype = {
         init : function(box, conf) {
             var me = this;
             me.box = box;
@@ -12,12 +12,12 @@ define([
             me.fieldGroupMap = [];
             me.fieldGroupCnt = [];
 
+            var idx = 0;
             for (var i in conf) {
                 var groupId = -1;
-                var idx = 0;
                 if (typeof conf[i].fieldGroup !== "undefined") {
                     var last = Math.max(me.fieldGroupMap.length-1, 0);
-                    if (me.fieldGroupMap[last] == conf[i].fieldGroup) {
+                    if (idx>0 && me.field[idx-1].groupId==last && me.fieldGroupMap[last]==conf[i].fieldGroup) {
                         me.fieldGroupCnt[last]++;
                         groupId = last;
                     } else {
@@ -93,5 +93,5 @@ define([
             }
         },
     };
-    return Header;
+    return Head;
 });

@@ -7,11 +7,11 @@ require.config({
 });
 require(["dui"], function(Dui) {
     var option = {
-        dataGroup : {
-            fieldIndex : 0,
-            dataIndex : "brand"
-        },
         /*
+        dataGroup : {
+            //fieldIndex : 0,
+            dataIndex : "brand",
+        },
         */
         field : [
             {
@@ -21,9 +21,12 @@ require(["dui"], function(Dui) {
                 text : "金额",
                 fieldGroup: "销售",
                 dataIndex : "amount",
+                isSum : false,
+                sortable : true,
                 format : function(num) {
                     return "$"+num;
                 },
+                numSwitch : true
             },{
                 text : "数量",
                 fieldGroup: "销售",
