@@ -9,14 +9,13 @@ define([
         init : function(option) {
             var me = this;
             me.field = option.field;
-            me.data = [];
             me.group = option.group;
-            me.isSum = option.isSum;
-            me.sum = {};
-            me.sumPosition = option.sumPosition;
+            me.sum = option.sum;
+            me.data = [];
+            me.sumData = {};
 
             var tmpMap = [],
-                sum = {};
+                sumData = {};
             for (var i in option.data) {
                 var gValue = option.data[i][me.group.dataIndex];
                 var idx = tmpMap.indexOf(gValue);
@@ -28,7 +27,10 @@ define([
                 }
 
                 var row = Func.formatRow(option.data[i], me.field);
-                me.data[idx].sub.push({row: row});
+                me.data[idx].sub.push({
+                    row : row,
+                    dom : Func.createTr(row)
+                });
 
                 for (var j in option.data[i]) {
                     if (!Core.isNumber(option.data[i][j])) {
@@ -38,41 +40,23 @@ define([
                         me.data[idx].row[j] = me.data[idx].row[j] || 0;
                         me.data[idx].row[j] += option.data[i][j];
                     }
-                    if (me.isSum && Core.isNumber(option.data[i][j])) {
-                        sum[j] = sum[j] || 0;
-                        sum[j] += option.data[i][j];
+                    if (me.sum.is && Core.isNumber(option.data[i][j])) {
+                        sumData[j] = sumData[j] || 0;
+                        sumData[j] += option.data[i][j];
                     }
                 }
-                if (me.isSum) {
-                    me.sum.row = Func.formatSum(sum, me.field);
-                }
+            }
+            for (var i in me.data) {
+                me.data[i].row = Func.formatRow(me.data[i].row, me.field);
+                me.data[i].dom = Func.createTr(me.data[i].row);
+            }
+            if (me.sum.is) {
+                sumData[me.field[me.sum.fieldIndex].dataIndex] = option.sum.text;
+                me.sumData.row = Func.formatSum(sumData, me.field);
+                me.sumData.dom = Func.createTr(me.sumData.row);
             }
         },
         render : function(box) {
-            var me = this;
-            for (var i in me.data) {
-                var row = Func.formatRow(me.data[i].row, me.field);
-                me.data[i].row = row;
-                var tr = Func.createTr(row);
-                me.data[i].dom = tr;
-                box.append(tr);
-                for (var j in me.data[i].sub) {
-                    var tr2 = Func.createTr(me.data[i].sub[j].row);
-                    me.data[i].sub[j].dom = tr2.hide();
-                    box.append(tr2);
-                }
-                me.bindOpenEvent(i);
-            }
-            if (me.isSum) {
-                me.sum.dom = Func.createTr(me.sum.row);
-                if (me.sumPosition === "top") {
-                    box.prepend(me.sum.dom);
-                } else {
-                    box.append(me.sum.dom);
-                }
-            }
-        },
-        rerender : function(box) {
             var me = this;
             for (var i in me.data) {
                 box.append(me.data[i].dom);
@@ -86,12 +70,17 @@ define([
                 }
                 me.bindOpenEvent(i);
             }
-            if (me.isSum) {
-                if (me.sumPosition === "top") {
-                    box.prepend(me.sum.dom);
-                } else {
-                    box.append(me.sum.dom);
-                }
+            me.renderSum(box);
+        },
+        renderSum : function(box) {
+            var me = this;
+            if (!me.sum.is) {
+                return;
+            }
+            if (me.sum.valign === "top") {
+                box.prepend(me.sumData.dom);
+            } else {
+                box.append(me.sumData.dom);
             }
         },
         sort : function(idx, order) {

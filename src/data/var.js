@@ -4,6 +4,13 @@ define(function() {
             desc : 1,
             asc : -1
         },
-        defaultVar : "-"
+        defaultVar : "-",
+        sum : {
+            text : "合计",
+            valign : {
+                top : "top",
+                bottom : "bottom"
+            }
+        }
     };
 });

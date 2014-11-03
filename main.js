@@ -7,11 +7,12 @@ require.config({
 });
 require(["dui"], function(Dui) {
     var option = {
-        style : {
-            sumPosition : "bottom"  //top
+        sum : {
+            valign : "top", // top bottom
+            fieldIndex : 0,
+            text : "合计"
         },
         dataGroup : {
-            //fieldIndex : 0,
             dataIndex : "brand",
         },
         field : [
@@ -33,6 +34,7 @@ require(["dui"], function(Dui) {
                 text : "数量",
                 fieldGroup: "销售",
                 dataIndex : "count",
+                isSum : true
             },{
                 text : "金额/数量",
                 fieldGroup: "销售",

@@ -14,8 +14,24 @@ define([
             me.impl = null;
             me.numSwitch = "format";
             
-            var field = [],
-                isSum = false;
+            var sum = {
+                    text : Core.var.sum.text,
+                    valign : Core.var.sum.valign.bottom,
+                    fieldIndex : 0,
+                    is : false
+                },
+                group = {
+                    fieldIndex : null,
+                    dataIndex : null
+                },
+                field = [];
+
+            if (Core.isObject(option.sum)) {
+                sum.text = option.sum.text || sum.text;
+                sum.valign = option.sum.valign || sum.valign;
+                sum.fieldIndex = option.sum.fieldIndex || sum.fieldIndex;
+            }
+
             for (var i in option.field) {
                 var f = {
                     numSwitch : option.field[i].numSwitch || false,
@@ -26,35 +42,30 @@ define([
                 };
                 field.push(f);
                 if (f.isSum) {
-                    isSum = true;
+                    sum.is = true;
                 }
             }
+            if (sum.is) {
+                field[sum.fieldIndex].isSum = true;
+            }
 
-            var isGroup = false,
-                groupInfo = {};
+            var isGroup = false;
             if (Core.isObject(option.dataGroup)) {
                 var fieldIndex = option.dataGroup.fieldIndex || 0;
                 if (Core.isNumber(fieldIndex) && Core.isString(option.dataGroup.dataIndex) && Core.isObject(option.field[fieldIndex])) {
                     isGroup = true;
-                    groupInfo = {
-                        fieldIndex : option.field[fieldIndex].dataIndex,
-                        dataIndex : option.dataGroup.dataIndex
-                    }
+                    group.fieldIndex = option.field[fieldIndex].dataIndex;
+                    group.dataIndex = option.dataGroup.dataIndex;
                 }
             }
 
-            var sumPosition = "bottom";
-            if (Core.isObject(option.style)) {
-                sumPosition = option.style.sumPosition || sumPosition;
-            }
             var conf = {
                 field : field, 
-                isSum : isSum,
-                sumPosition : option.style.sumPosition,
+                sum : sum,
                 data : option.data
             };
             if (isGroup) {
-                conf.group = groupInfo;
+                conf.group = group;
                 me.impl = new Grouped(conf);
             } else {
                 me.impl = new Lineal(conf);
@@ -75,7 +86,7 @@ define([
             var me = this;
             me.impl.sort(idx, order);
             me.tbody.empty();
-            me.impl.rerender(me.tbody);
+            me.impl.render(me.tbody);
         },
     };
     return Body;
