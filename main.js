@@ -12,9 +12,11 @@ require(["dui"], function(Dui) {
             fieldIndex : 0,
             text : "合计"
         },
+        /*
         dataGroup : {
             dataIndex : "brand",
         },
+        */
         field : [
             {
                 text : "名称",
@@ -34,6 +36,7 @@ require(["dui"], function(Dui) {
                 text : "数量",
                 fieldGroup: "销售",
                 dataIndex : "count",
+                sortable : true,
                 isSum : true
             },{
                 text : "金额/数量",
@@ -41,6 +44,7 @@ require(["dui"], function(Dui) {
                 formula : function(data) {
                     return data.amount/data.count;
                 },
+                sortable : true,
                 isSum : true
             }
         ],

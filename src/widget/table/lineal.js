@@ -29,7 +29,7 @@ define([
                 me.data[i].dom = tr;
             }
             if (me.sum.is) {
-                sumData[me.field[sum.fieldIndex].dataIndex] = option.sum.text;
+                sumData[me.field[me.sum.fieldIndex].dataIndex] = option.sum.text;
                 me.sumData.row = Func.formatSum(sumData, me.field);
                 me.sumData.dom = Func.createTr(me.sumData.row);
             }
