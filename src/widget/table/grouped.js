@@ -1,108 +1,88 @@
 define([
-    "../../core"
-], function(Core) {
+    "../../core",
+    "./func"
+], function(Core, Func) {
     function Grouped() {
         this.init.apply(this, arguments);
     }
     Grouped.prototype = {
-        init : function(box, option) {
+        init : function(option) {
             var me = this;
-            me.box = box;
-            me.field = [];
+            me.field = option.field;
             me.data = [];
-            me.groupData = [];
-            me.sum = {row:[]};
-            me.isGroup = false;
-            me.isSum = false;
+            me.group = option.group;
+            me.isSum = option.isSum;
 
-            if (Core.isObject(option.dataGroup)) {
-                option.dataGroup.fieldIndex = option.dataGroup.fieldIndex = 0;
-                if (Core.isNumber(option.dataGroup.fieldIndex) 
-                    && Core.isString(option.dataGroup.dataIndex)
-                    && typeof option.field[option.dataGroup.fieldIndex]!=="undefined") {
-                    me.isGroup = true;
-                }
-            }
-            for (var i in option.field) {
-                var f = {
-                    numSwitch : option.field[i].numSwitch || false,
-                    format : option.field[i].format || false,
-                    formula : option.field[i].formula || false,
-                    dataIndex : option.field[i].dataIndex,
-                    isSum : option.field[i].isSum || false
-                };
-                me.field.push(f);
-                if (f.isSum) {
-                    me.isSum = true;
-                }
-            }
             var tmpMap = [];
-            var counter = 0;
             for (var i in option.data) {
-                me.data.push({row: me.formatRow(option.data[i])});
-                if (me.isGroup || me.isSum) {
-                    if (me.isGroup) {
-                        var gField = option.field[option.dataGroup.fieldIndex].dataIndex;
-                        var gValue = option.data[i][option.dataGroup.dataIndex];
-                        var idx = tmpMap.indexOf(gValue);
-                        if (idx < 0) {
-                            tmpMap.push(gValue);
-                            idx = tmpMap.length-1;
-                            me.groupData[idx] = {data: {}, sub : []};
-                            me.groupData[idx].data[gField] = gValue;
-                            me.groupData[idx].sub.push(counter);
-                        }
+                var gValue = option.data[i][me.group.dataIndex];
+                var idx = tmpMap.indexOf(gValue);
+                if (idx < 0) {
+                    tmpMap.push(gValue);
+                    idx = tmpMap.length-1;
+                    me.data[idx] = {row: {}, sub : []};
+                    me.data[idx].row[me.group.fieldIndex] = gValue;
+                }
+
+                var row = Func.formatRow(option.data[i], me.field);
+                me.data[idx].sub.push({row: row});
+
+                for (var j in option.data[i]) {
+                    if (!Core.isNumber(option.data[i][j])) {
+                        continue;
                     }
-                    for (var j in option.data[i]) {
-                        if (!Core.isNumber(option.data[i][j])) {
-                            continue;
-                        }
-                        if (me.isSum) {
-                            me.sum.data[j] = me.sum.sum[j] || 0;
-                            me.sum.data[j] += option.data[i][j];
-                        }
-                        if (me.isGroup && j!==gField) {
-                            me.groupData[idx].data[j] = me.groupData[idx].data[j] || 0;
-                            me.groupData[idx].data[j] += option.data[i][j];
-                        }
+                    if (j !== me.group.fieldIndex) {
+                        me.data[idx].row[j] = me.data[idx].row[j] || 0;
+                        me.data[idx].row[j] += option.data[i][j];
                     }
                 }
-                counter++;
             }
         },
-        render : function() {
+        render : function(box) {
             var me = this;
-            var tbody = new Core.dom("tbody");
-            if (me.isGroup) {
-                for (var i in me.groupData) {
-                    var tr = new Core.dom("tr");
-                    var row = me.formatRow(me.groupData[i].data);
-                    me.groupData[i].row = row;
-                    for (var j in row) {
-                        var td = new Core.dom("td");
-                        td.text(row[j].format);
-                        tr.append(td);
-                    }
-                    me.groupData[i].dom = tr;
-                    tbody.append(tr);
+            for (var i in me.data) {
+                var row = Func.formatRow(me.data[i].row, me.field);
+                me.data[i].row = row;
+                var tr = Func.createTr(row);
+                me.data[i].dom = tr;
+                box.append(tr);
+                for (var j in me.data[i].sub) {
+                    var tr2 = Func.createTr(me.data[i].sub[j].row);
+                    me.data[i].sub[j].dom = tr2.hide();
+                    box.append(tr2);
                 }
-            } else {
-                for (var i in me.data) {
-                    var tr = new Core.dom("tr");
-                    for (var j in me.data[i].row) {
-                        var td = new Core.dom("td");
-                        td.text(me.data[i].row[j].format);
-                        tr.append(td);
-                    }
-                    me.data[i].dom = tr;
-                    tbody.append(tr);
-                }
+                (function(idx) {
+                    tr.bind("click", function(e) {
+                        me.data[idx].open = me.data[idx].open==1 ? 0 : 1;
+                        for (var j in me.data[idx].sub) {
+                            if (me.data[idx].open) {
+                                me.data[idx].sub[j].dom.show();
+                            } else {
+                                me.data[idx].sub[j].dom.hide();
+                            }
+                        }
+                        e.stopPropagation();
+                    });
+                })(i);
             }
-            me.box.append(tbody);
+        },
+        rerender : function(box) {
         },
         sort : function(idx, order) {
         },
-        numSwitch : function() {
+        numSwitch : function(f) {
+            var me = this;
+            for (var i in me.data) {
+                if (!me.field[i].numSwitch) {
+                    continue;
+                }
+                for (var j in me.data) {
+                    me.data[j].dom.children(i).text(me.data[j].row[i][f]);
+                    for (var k in me.data[j].sub) {
+                        me.data[j].sub[k].dom.children(i).text(me.data[j].sub[k].row[i][f]);
+                    }
+                }
+            }
         },
     };
     return Grouped;

@@ -27,12 +27,7 @@ define([
         render : function(box) {
             var me = this;
             for (var i in me.data) {
-                var tr = new Core.dom("tr");
-                for (var j in me.data[i].row) {
-                    var td = new Core.dom("td");
-                    td.text(me.data[i].row[j].format);
-                    tr.append(td);
-                }
+                var tr = Func.createTr(me.data[i].row);
                 me.data[i].dom = tr;
                 box.append(tr);
             }

@@ -2,6 +2,15 @@ define([
     "../../core"
 ],function(Core) {
     return {
+        createTr : function(row) {
+            var tr = new Core.dom("tr");
+            for (var j in row) {
+                var td = new Core.dom("td");
+                td.text(row[j].format);
+                tr.append(td);
+            }
+            return tr;
+        },
         formatRow : function(data, field) {
             var row = [];
             for (var i in field) {

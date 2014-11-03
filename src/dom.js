@@ -51,17 +51,16 @@ define(["jquery"], function($) {
             this.dom.bind(e, deal);
             return this;
         },
-        replace : function(target, src) {
-            var me = this;
-            var obj = me.dom.find(target);
-            if (obj.length > 0) {
-                obj.html(src);
-            } else {
-                me.append(src);
-            }
-        },
         children : function(idx) {
             return Dom.get(this.dom.children().eq(idx));
+        },
+        hide : function() {
+            this.dom.hide();
+            return this;
+        },
+        show : function() {
+            this.dom.show();
+            return this;
         },
     };
     return Dom;
