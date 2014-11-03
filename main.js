@@ -12,11 +12,9 @@ require(["dui"], function(Dui) {
             fieldIndex : 0,
             text : "合计"
         },
-        /*
         dataGroup : {
             dataIndex : "brand",
         },
-        */
         field : [
             {
                 text : "名称",

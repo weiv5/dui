@@ -1,7 +1,7 @@
 define([
-    "../../core",
-    "./body/lineal",
-    "./body/grouped"
+    "../../../core",
+    "./lineal",
+    "./grouped"
 ], function(Core, Lineal, Grouped) {
     function Body() {
         this.init.apply(this, arguments);
