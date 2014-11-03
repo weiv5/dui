@@ -11,7 +11,8 @@ define([
             me.field = option.field;
             me.isSum = option.isSum;
             me.data = [];
-            me.sum = [];
+            me.sum = {};
+            me.sumPosition = option.sumPosition;
             
             var sum = {};
             for (var i in option.data) {
@@ -23,6 +24,9 @@ define([
                     }
                 }
             }
+            if (me.isSum) {
+                me.sum.row = Func.formatSum(sum, me.field);
+            }
         },
         render : function(box) {
             var me = this;
@@ -31,17 +35,30 @@ define([
                 me.data[i].dom = tr;
                 box.append(tr);
             }
+            if (me.isSum) {
+                me.sum.dom = Func.createTr(me.sum.row);
+                if (me.sumPosition === "top") {
+                    box.prepend(me.sum.dom);
+                } else {
+                    box.append(me.sum.dom);
+                }
+            }
         },
         rerender : function(box) {
             var me = this;
             for (var i in me.data) {
                 box.append(me.data[i].dom);
             }
+            if (me.isSum) {
+                if (me.sumPosition === "top") {
+                    box.prepend(me.sum.dom);
+                } else {
+                    box.append(me.sum.dom);
+                }
+            }
         },
         sort : function(idx, order) {
-            this.data.sort(function(a, b) {
-                return a.row[idx].num > b.row[idx].num ? order : -order;
-            });
+            Func.sortTr(this.data, idx, order);
         },
         numSwitch : function(f) {
             var me = this;

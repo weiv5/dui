@@ -42,9 +42,15 @@ define([
                     }
                 }
             }
+
+            var sumPosition = "bottom";
+            if (Core.isObject(option.style)) {
+                sumPosition = option.style.sumPosition || sumPosition;
+            }
             var conf = {
                 field : field, 
                 isSum : isSum,
+                sumPosition : option.style.sumPosition,
                 data : option.data
             };
             if (isGroup) {
@@ -56,10 +62,12 @@ define([
         },
         render : function() {
             var me = this;
+            /*
             me.tbody.bind("click", function() {
                 me.numSwitch = me.numSwitch=="format" ? "num" : "format";
                 me.impl.numSwitch(me.numSwitch);
             });
+            */
             me.impl.render(me.tbody);
             me.box.append(me.tbody);
         },

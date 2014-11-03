@@ -2,6 +2,11 @@ define([
     "../../core"
 ],function(Core) {
     return {
+        sortTr : function(trs, idx, order) {
+            trs.sort(function(a, b) {
+                return a.row[idx].num > b.row[idx].num ? order : -order;
+            });
+        },
         createTr : function(row) {
             var tr = new Core.dom("tr");
             for (var j in row) {

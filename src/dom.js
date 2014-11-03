@@ -39,6 +39,10 @@ define(["jquery"], function($) {
             this.dom.append(el.dom);
             return this;
         },
+        prepend : function(el) {
+            this.dom.prepend(el.dom);
+            return this;
+        },
         html : function(el) {
             this.dom.html(el.dom);
             return this;

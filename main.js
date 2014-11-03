@@ -7,6 +7,9 @@ require.config({
 });
 require(["dui"], function(Dui) {
     var option = {
+        style : {
+            sumPosition : "bottom"  //top
+        },
         dataGroup : {
             //fieldIndex : 0,
             dataIndex : "brand",
@@ -24,7 +27,8 @@ require(["dui"], function(Dui) {
                 format : function(num) {
                     return "$"+num;
                 },
-                numSwitch : true
+                numSwitch : true,
+                isSum : true
             },{
                 text : "数量",
                 fieldGroup: "销售",
@@ -34,7 +38,8 @@ require(["dui"], function(Dui) {
                 fieldGroup: "销售",
                 formula : function(data) {
                     return data.amount/data.count;
-                }
+                },
+                isSum : true
             }
         ],
         data : [
