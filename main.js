@@ -12,9 +12,11 @@ require(["dui"], function(Dui) {
             fieldIndex : 0,
             text : "合计"
         },
+        /*
         dataGroup : {
             dataIndex : "brand",
         },
+        */
         field : [
             {
                 text : "名称",
@@ -67,7 +69,15 @@ require(["dui"], function(Dui) {
                 brand: "电视",
                 amount : 500,
                 count : 50,
-            },
+            },{
+                name : "tv3",
+                brand: "电视",
+                count : 40,
+            },{
+                name : "tv4",
+                brand: "电视",
+                count : 30,
+            }
         ]
     };
     var table = new Dui.table("#tbl", option);

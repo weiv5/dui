@@ -38,6 +38,9 @@ define([
         },
         isObject : function(obj) {
             return toString.call(obj) === '[object Object]';
+        },
+        isNaN : function(obj) {
+            return Core.isNumber(obj) && obj !== +obj;
         }
     });
     return Core;

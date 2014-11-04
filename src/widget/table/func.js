@@ -4,6 +4,9 @@ define([
     return {
         sortTr : function(trs, idx, order) {
             trs.sort(function(a, b) {
+                if (a.row[idx].num == b.row[idx].num) {
+                    return 0;
+                }
                 return a.row[idx].num > b.row[idx].num ? order : -order;
             });
         },
@@ -28,6 +31,9 @@ define([
                 var format = num;
                 if (typeof field[i].format === "function") {
                     format = field[i].format(num);
+                }
+                if (num === Core.var.defaultVar) {
+                    num = 0;
                 }
                 row.push({format: format, num: num});
             }
