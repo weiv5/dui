@@ -62,7 +62,13 @@ define([
                     continue;
                 }
                 for (var j in me.data) {
+                    if (me.data[j].row[i].format == Core.var.defaultVar) {
+                        continue;
+                    }
                     me.data[j].dom.children(i).text(me.data[j].row[i][f]);
+                }
+                if (me.sum.is && me.sumData.row[i].format !== Core.var.defaultVar) {
+                    me.sumData.dom.children(i).text(me.sumData.row[i][f]);
                 }
             }
         },

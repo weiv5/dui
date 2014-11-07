@@ -5,9 +5,9 @@ define([
         this.init.apply(this, arguments);
     }
     Head.prototype = {
-        init : function(box, conf) {
+        init : function(table, conf) {
             var me = this;
-            me.box = box;
+            me.table = table;
             me.field = [];
             me.fieldGroupMap = [];
             me.fieldGroupCnt = [];
@@ -38,7 +38,7 @@ define([
             }
             me.isFieldGroup = me.fieldGroupMap.length > 0;
         },
-        render : function() {
+        render : function(box) {
             var me = this;
             var colgroup = new Core.dom("colgroup");
             var thead = new Core.dom("thead");
@@ -76,8 +76,8 @@ define([
                 thead.append(tr1);
             }
             thead.append(tr2);
-            me.box.append(colgroup);
-            me.box.append(thead);
+            box.append(colgroup);
+            box.append(thead);
         },
         bindEvent : function(idx) {
             var me = this;
@@ -88,7 +88,7 @@ define([
                     obj.ord = obj.ord == Core.var.sort.asc ? Core.var.sort.desc : Core.var.sort.asc;
                     var nCls = Core.css.table.th.sort[obj.ord];
                     obj.dom.removeClass(oCls).addClass(nCls);
-                    me.box.sort(idx, obj.ord);
+                    me.table.body.sort(idx, obj.ord);
                 });
             }
         },

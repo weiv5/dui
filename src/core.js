@@ -40,7 +40,7 @@ define([
             return toString.call(obj) === '[object Object]';
         },
         isNaN : function(obj) {
-            return Core.isNumber(obj) && obj !== +obj;
+            return !Core.isString(obj)&&isNaN(obj);
         }
     });
     return Core;

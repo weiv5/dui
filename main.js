@@ -31,7 +31,7 @@ require(["dui"], function(Dui) {
                     return "$"+num;
                 },
                 numSwitch : true,
-                isSum : true
+//                isSum : true
             },{
                 text : "数量",
                 fieldGroup: "销售",

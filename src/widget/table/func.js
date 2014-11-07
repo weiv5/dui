@@ -28,8 +28,11 @@ define([
                 } else if (typeof data[field[i].dataIndex] !== "undefined") {
                     num = data[field[i].dataIndex];
                 }
+                if (Core.isNaN(num)) {
+                    num = Core.var.defaultVar;
+                }
                 var format = num;
-                if (typeof field[i].format === "function") {
+                if (num!==Core.var.defaultVar && typeof field[i].format === "function") {
                     format = field[i].format(num);
                 }
                 if (num === Core.var.defaultVar) {
@@ -49,8 +52,11 @@ define([
                     } else if (typeof data[field[i].dataIndex] !== "undefined") {
                         num = data[field[i].dataIndex];
                     }
+                    if (Core.isNaN(num)) {
+                        num = Core.var.defaultVar;
+                    }
                     var format = num;
-                    if (typeof field[i].format === "function") {
+                    if (num!==Core.var.defaultVar && typeof field[i].format === "function") {
                         format = field[i].format(num);
                     }
                 } else {

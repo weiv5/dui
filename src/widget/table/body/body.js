@@ -7,12 +7,11 @@ define([
         this.init.apply(this, arguments);
     }
     Body.prototype = {
-        init : function(box, option) {
+        init : function(table, option) {
             var me = this;
-            me.box = box;
+            me.table = table;
             me.tbody = new Core.dom("tbody");
             me.impl = null;
-            me.numSwitch = "format";
             
             var sum = {
                     text : Core.var.sum.text,
@@ -71,22 +70,19 @@ define([
                 me.impl = new Lineal(conf);
             }
         },
-        render : function() {
+        render : function(box) {
             var me = this;
-            /*
-            me.tbody.bind("click", function() {
-                me.numSwitch = me.numSwitch=="format" ? "num" : "format";
-                me.impl.numSwitch(me.numSwitch);
-            });
-            */
+            me.tbody.empty();
             me.impl.render(me.tbody);
-            me.box.append(me.tbody);
+            box.append(me.tbody);
         },
         sort : function(idx, order) {
             var me = this;
             me.impl.sort(idx, order);
-            me.tbody.empty();
             me.impl.render(me.tbody);
+        },
+        numSwitch : function(stat) {
+            this.impl.numSwitch(stat);
         },
     };
     return Body;

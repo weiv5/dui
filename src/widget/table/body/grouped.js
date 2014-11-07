@@ -92,15 +92,24 @@ define([
         },
         numSwitch : function(f) {
             var me = this;
-            for (var i in me.data) {
+            for (var i in me.field) {
                 if (!me.field[i].numSwitch) {
                     continue;
                 }
                 for (var j in me.data) {
+                    if (me.data[j].row[i].format == Core.var.defaultVar) {
+                        continue;
+                    }
                     me.data[j].dom.children(i).text(me.data[j].row[i][f]);
                     for (var k in me.data[j].sub) {
+                        if (me.data[j].sub[k].row[i].format == Core.var.defaultVar) {
+                            continue;
+                        }
                         me.data[j].sub[k].dom.children(i).text(me.data[j].sub[k].row[i][f]);
                     }
+                }
+                if (me.sum.is && me.sumData.row[i].format !== Core.var.defaultVar) {
+                    me.sumData.dom.children(i).text(me.sumData.row[i][f]);
                 }
             }
         },
