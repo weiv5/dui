@@ -24,12 +24,6 @@ define([
             }
             return arr.indexOf(el)>=0 ? true : false;
         },
-        isEmpty : function(obj) {
-            if (obj == null) return true;
-            if (isArray(obj) || isString(obj) || _.isArguments(obj)) return obj.length === 0;
-            for (var key in obj) if (_.has(obj, key)) return false;
-            return true;
-        },
         isNumber : function(obj) {
             return !Core.isArray(obj) && (obj-parseFloat(obj)+1)>=0;
         },
