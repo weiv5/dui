@@ -49,6 +49,7 @@ define([
             for (var i in me.data) {
                 me.data[i].row = Func.formatRow(me.data[i].row, me.field);
                 me.data[i].dom = Func.createTr(me.data[i].row);
+                me.bindOpenEvent(me.data[i]);
             }
             if (me.sum.is) {
                 sumData[me.field[me.sum.fieldIndex].dataIndex] = option.sum.text;
@@ -68,7 +69,6 @@ define([
                     }
                     box.append(me.data[i].sub[j].dom);
                 }
-                me.bindOpenEvent(i);
             }
             me.renderSum(box);
         },
@@ -113,15 +113,15 @@ define([
                 }
             }
         },
-        bindOpenEvent : function(idx) {
+        bindOpenEvent : function(item) {
             var me = this;
-            me.data[idx].dom.bind("click", function(e) {
-                me.data[idx].open = me.data[idx].open==false ? true : false;
-                for (var j in me.data[idx].sub) {
-                    if (me.data[idx].open) {
-                        me.data[idx].sub[j].dom.show();
+            item.dom.bind("click", function(e) {
+                item.open = item.open==false ? true : false;
+                for (var j in item.sub) {
+                    if (item.open) {
+                        item.sub[j].dom.show();
                     } else {
-                        me.data[idx].sub[j].dom.hide();
+                        item.sub[j].dom.hide();
                     }
                 }
             });

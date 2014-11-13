@@ -31,7 +31,7 @@ require(["dui"], function(Dui) {
                     return "$"+num;
                 },
                 numSwitch : true,
-//                isSum : true
+                isSum : true
             },{
                 text : "数量",
                 fieldGroup: "销售",
@@ -82,4 +82,8 @@ require(["dui"], function(Dui) {
     };
     var table = new Dui.table("#tbl", option);
     table.render();
+
+    option.dataGroup = {dataIndex:"brand"};
+    var table2 = new Dui.table("#tbl2", option);
+    table2.render();
 });
