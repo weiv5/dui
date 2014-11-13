@@ -34,7 +34,7 @@ define([
             return toString.call(obj) === '[object Object]';
         },
         isNaN : function(obj) {
-            return !Core.isString(obj)&&isNaN(obj);
+            return !Core.isString(obj)&&!Core.isObject(obj)&&!Core.isArray(obj)&&isNaN(obj);
         }
     });
     return Core;
