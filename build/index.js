@@ -1,8 +1,8 @@
 require.config({
-    baseUrl: "src/",
+    baseUrl: ".",
     paths: {
-        "dui" : "./dui",
-        "jquery" : "./lib/jquery"
+        "dui" : "./dui.min",
+        "jquery" : "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min"
     },
 });
 require(["dui"], function(Dui) {
