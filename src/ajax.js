@@ -1,7 +1,6 @@
 define([
-    "../core",
     "jquery"
-], function(Core, $) {
+], function($) {
     var get = function(url, success, error, timeout) {
         timeout = timeout || 5000;
         $.ajax({
@@ -41,11 +40,8 @@ define([
             }
         });
     }
-    Core.extend({
-        ajax : {
-            get : get,
-            post : post
-        }
-    });
-    return Core;
+    return {
+        get : get,
+        post : post
+    };
 });

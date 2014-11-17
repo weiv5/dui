@@ -4,7 +4,8 @@ define([
     "./dom",
     "./data/css",
     "./data/var",
-], function(Format, Err, Dom, Css, Var) {
+    "./ajax"
+], function(Format, Err, Dom, Css, Var, Ajax) {
     var Core = function() {};
     Core.extend = Core.prototype.extend = function(obj) {
         for (var i in obj) {
@@ -16,6 +17,7 @@ define([
         css : Css,
         var : Var,
         error : Err,
+        ajax : Ajax,
         format : Format,
         isArray: Array.isArray,
         inArray: function(el, arr) {
