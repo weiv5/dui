@@ -1,6 +1,9 @@
 define(function() {
     var formatFloat = function(f, pos) {
         pos = pos || 0;
+        if (pos == 0) {
+            return f;
+        }
         f = parseFloat(f);
         var score = Math.round(f*Math.pow(10, pos))/Math.pow(10, pos);
         return score.toFixed(pos);
