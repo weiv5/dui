@@ -4,8 +4,9 @@ define([
     "./dom",
     "./data/css",
     "./data/var",
-    "./ajax"
-], function(Format, Err, Dom, Css, Var, Ajax) {
+    "./ajax",
+    "./math"
+], function(Format, Err, Dom, Css, Var, Ajax, Math) {
     var Core = function() {};
     Core.extend = Core.prototype.extend = function(obj) {
         for (var i in obj) {
@@ -13,12 +14,6 @@ define([
         }
     };
     Core.extend({
-        dom : Dom,
-        css : Css,
-        var : Var,
-        error : Err,
-        ajax : Ajax,
-        format : Format,
         isArray: Array.isArray,
         inArray: function(el, arr) {
             if (!Core.isArray(arr)) {
@@ -37,7 +32,14 @@ define([
         },
         isNaN : function(obj) {
             return !Core.isString(obj)&&!Core.isObject(obj)&&!Core.isArray(obj)&&isNaN(obj);
-        }
+        },
+        format : Format,
+        error : Err,
+        dom : Dom,
+        css : Css,
+        var : Var,
+        ajax : Ajax,
+        math : Math,
     });
     return Core;
 });

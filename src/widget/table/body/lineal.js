@@ -20,7 +20,7 @@ define([
                 for (var j in option.data[i]) {
                     if (me.sum.is && Core.isNumber(option.data[i][j])) {
                         sumData[j] = sumData[j] || 0;
-                        sumData[j] += option.data[i][j];
+                        sumData[j] = Core.math.add(sumData[j], option.data[i][j]);
                     }
                 }
             }

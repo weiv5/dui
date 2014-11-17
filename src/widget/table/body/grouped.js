@@ -38,11 +38,11 @@ define([
                     }
                     if (j !== me.group.fieldIndex) {
                         me.data[idx].row[j] = me.data[idx].row[j] || 0;
-                        me.data[idx].row[j] += option.data[i][j];
+                        me.data[idx].row[j] = Core.math.add(me.data[idx].row[j], option.data[i][j]);
                     }
                     if (me.sum.is && Core.isNumber(option.data[i][j])) {
                         sumData[j] = sumData[j] || 0;
-                        sumData[j] += option.data[i][j];
+                        sumData[j] = Core.math.add(sumData[j], option.data[i][j]);
                     }
                 }
             }
