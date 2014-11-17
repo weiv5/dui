@@ -44,11 +44,19 @@ define(["jquery"], function($) {
             return this;
         },
         append : function(el) {
-            this.dom.append(el.dom);
+            if (el instanceof Dom) {
+                this.dom.append(el.dom);
+            } else if (typeof el === "string") {
+                this.dom.append(el);
+            }
             return this;
         },
         prepend : function(el) {
-            this.dom.prepend(el.dom);
+            if (el instanceof Dom) {
+                this.dom.prepend(el.dom);
+            } else if (typeof el === "string") {
+                this.dom.prepend(el);
+            }
             return this;
         },
         empty : function() {
