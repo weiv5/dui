@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: "./src/",
+    baseUrl: "../src/",
     paths: {
         "dui" : "./dui",
         "jquery" : "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min"
