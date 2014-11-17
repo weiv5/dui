@@ -1,5 +1,5 @@
 define([
-    "../../core"
+    "../../../core"
 ], function(Core) {
     function Head() {
         this.init.apply(this, arguments);
@@ -88,9 +88,9 @@ define([
             var obj = me.field[idx];
             if (obj.sortable) {
                 obj.dom.bind("click", function() {
-                    var oCls = Core.css.table.th.sort[obj.ord];
+                    var oCls = Core.css.order[obj.ord];
                     obj.ord = obj.ord == Core.var.sort.asc ? Core.var.sort.desc : Core.var.sort.asc;
-                    var nCls = Core.css.table.th.sort[obj.ord];
+                    var nCls = Core.css.order[obj.ord];
                     obj.dom.removeClass(oCls).addClass(nCls);
                     me.table.body.sort(idx, obj.ord);
                 });
