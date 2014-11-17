@@ -37,7 +37,8 @@ define([
                     format : option.field[i].format || false,
                     formula : option.field[i].formula || false,
                     dataIndex : option.field[i].dataIndex,
-                    isSum : option.field[i].isSum || false
+                    isSum : option.field[i].isSum || false,
+                    dataClass : option.field[i].dataClass || false
                 };
                 field.push(f);
                 if (f.isSum) {

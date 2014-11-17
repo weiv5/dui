@@ -35,16 +35,16 @@ define(["jquery"], function($) {
             this.dom.text(text);
             return this;
         },
+        html : function(html) {
+            this.dom.html(html);
+            return this;
+        },
         append : function(el) {
             this.dom.append(el.dom);
             return this;
         },
         prepend : function(el) {
             this.dom.prepend(el.dom);
-            return this;
-        },
-        html : function(el) {
-            this.dom.html(el.dom);
             return this;
         },
         empty : function() {

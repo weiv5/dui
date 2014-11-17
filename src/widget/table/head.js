@@ -33,6 +33,7 @@ define([
                     order : Core.var.sort.asc,
                     width : conf[i].width || 100,
                     groupId : groupId,
+                    fieldClass : conf[i].fieldClass || false
                 });
                 idx++;
             }
@@ -51,7 +52,7 @@ define([
                 colgroup.append(col);
 
                 var th2 = new Core.dom("th");
-                th2.text(me.field[i].text);
+                th2.html(me.field[i].text);
                 if (me.isFieldGroup) {
                     if (me.field[i].groupId >= 0) {
                         tr2.append(th2);
@@ -59,7 +60,7 @@ define([
                         if (!Core.inArray(gid, fieldGroupAppend)) {
                             fieldGroupAppend.push(gid);
                             var th1 = new Core.dom("th");
-                            th1.attr("colspan", me.fieldGroupCnt[gid]).text(me.fieldGroupMap[gid]);
+                            th1.attr("colspan", me.fieldGroupCnt[gid]).html(me.fieldGroupMap[gid]);
                             tr1.append(th1);
                         }
                     } else {
@@ -68,6 +69,9 @@ define([
                     }
                 } else {
                     tr2.append(th2);
+                }
+                if (me.field[i].fieldClass) {
+                    th2.addClass(me.field[i].fieldClass);
                 }
                 me.field[i].dom = th2;
                 me.bindEvent(i);

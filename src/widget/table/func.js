@@ -14,6 +14,9 @@ define([
             var tr = new Core.dom("tr");
             for (var j in row) {
                 var td = new Core.dom("td");
+                if (row[j].dataClass) {
+                    td.addClass(row[j].dataClass);
+                }
                 td.text(row[j].format);
                 tr.append(td);
             }
@@ -38,7 +41,7 @@ define([
                 if (num === Core.var.defaultVar) {
                     num = 0;
                 }
-                row.push({format: format, num: num});
+                row.push({format: format, num: num, dataClass: field[i].dataClass});
             }
             return row;
         },
@@ -62,7 +65,7 @@ define([
                 } else {
                     var format = num;
                 }
-                row.push({format: format, num: num});
+                row.push({format: format, num: num, dataClass: field[i].dataClass});
             }
             return row;
         },
