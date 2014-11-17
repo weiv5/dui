@@ -26,10 +26,6 @@ define([
                         groupId = me.fieldGroupMap.length-1;
                     }
                 }
-                var fieldClass = conf[i].fieldClass || "";
-                if (groupId > 0) {
-                    fieldClass += " "+Core.css.th.align.center;
-                }
                 me.field.push({
                     idx : idx,
                     text : conf[i].text || "",
@@ -37,7 +33,7 @@ define([
                     order : Core.var.sort.asc,
                     width : conf[i].width || 100,
                     groupId : groupId,
-                    fieldClass : fieldClass || false
+                    fieldClass : conf[i].fieldClass || false
                 });
                 idx++;
             }
@@ -64,7 +60,7 @@ define([
                         if (!Core.inArray(gid, fieldGroupAppend)) {
                             fieldGroupAppend.push(gid);
                             var th1 = new Core.dom("th");
-                            th1.attr("colspan", me.fieldGroupCnt[gid]).html(me.fieldGroupMap[gid]);
+                            th1.attr("colspan", me.fieldGroupCnt[gid]).addClass(Core.css.table.th.align.center).html(me.fieldGroupMap[gid]);
                             tr1.append(th1);
                         }
                     } else {
@@ -91,10 +87,11 @@ define([
             var me = this;
             var obj = me.field[idx];
             if (obj.sortable) {
+                obj.dom.addClass(Core.css.sort.init);
                 obj.dom.bind("click", function() {
-                    var oCls = Core.css.order[obj.ord];
+                    var oCls = Core.css.sort[obj.ord];
                     obj.ord = obj.ord == Core.var.sort.asc ? Core.var.sort.desc : Core.var.sort.asc;
-                    var nCls = Core.css.order[obj.ord];
+                    var nCls = Core.css.sort[obj.ord];
                     obj.dom.removeClass(oCls).addClass(nCls);
                     me.table.body.sort(idx, obj.ord);
                 });

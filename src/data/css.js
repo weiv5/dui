@@ -31,10 +31,10 @@ define(function() {
         pager : {
             box : "x-widget-pager"
         },
-        order : {
+        sort : {
             init : "order",
-            desc : "order-down",
-            asc : "order-up"
+            1 : "order-up",
+            "-1" : "order-down"
         },
     };
 });
