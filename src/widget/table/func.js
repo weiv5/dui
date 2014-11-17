@@ -17,7 +17,7 @@ define([
                 if (row[j].dataClass) {
                     td.addClass(row[j].dataClass);
                 }
-                td.text(row[j].format);
+                td.html(row[j].format);
                 tr.append(td);
             }
             return tr;

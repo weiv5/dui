@@ -28,17 +28,23 @@ require(["dui"], function(Dui) {
                 dataIndex : "amount",
                 isSum : false,
                 sortable : true,
-                format : function(num) {
-                    return "$"+num;
-                },
+                format : Dui.format.money,
                 numSwitch : true,
                 isSum : true,
                 dataClass : "dataClass1",
                 fieldClass : ""
             },{
-                text : "数量",
+                text : "订单数",
                 fieldGroup: "销售",
                 dataIndex : "count",
+                format : Dui.format.intComma,
+                sortable : true,
+                isSum : true
+            },{
+                text : "人数",
+                fieldGroup: "销售",
+                dataIndex : "count",
+                format : Dui.format.intUnit,
                 sortable : true,
                 isSum : true
             },{
@@ -47,6 +53,7 @@ require(["dui"], function(Dui) {
                 formula : function(data) {
                     return data.amount/data.count;
                 },
+                format : Dui.format.rate,
                 sortable : true,
                 isSum : true
             }
@@ -55,31 +62,31 @@ require(["dui"], function(Dui) {
             {
                 name : "mi1",
                 brand: "手机",
-                amount : 1000,
-                count : 200,
+                amount : 100100.91,
+                count : 20190,
             },{
                 name : "mi2",
                 brand: "手机",
-                amount : 5000,
-                count : 600,
+                amount : 500120,
+                count : 60230,
             },{
                 name : "tv1",
                 brand: "电视",
-                amount : 7000,
-                count : 800,
+                amount : 700980,
+                count : 809080,
             },{
                 name : "tv2",
                 brand: "电视",
-                amount : 500,
-                count : 50,
+                amount : 50180,
+                count : 52330,
             },{
                 name : "tv3",
                 brand: "电视",
-                count : 40,
+                count : 411450,
             },{
                 name : "tv4",
                 brand: "电视",
-                count : 30,
+                count : 789330,
             }
         ]
     };
@@ -87,6 +94,7 @@ require(["dui"], function(Dui) {
     table.render();
 
     option.dataGroup = {dataIndex:"brand"};
+    option.sum.valign = "bottom";
     var table2 = new Dui.table("#tbl2", option);
     table2.render();
 });
