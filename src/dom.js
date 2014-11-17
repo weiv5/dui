@@ -35,8 +35,12 @@ define(["jquery"], function($) {
             this.dom.text(text);
             return this;
         },
-        html : function(html) {
-            this.dom.html(html);
+        html : function(el) {
+            if (typeof el === "string") {
+                this.dom.html(el);
+            } else if (el instanceof Dom) {
+                this.dom.html(el.dom);
+            }
             return this;
         },
         append : function(el) {
