@@ -26,6 +26,10 @@ define([
                         groupId = me.fieldGroupMap.length-1;
                     }
                 }
+                var fieldClass = conf[i].fieldClass || "";
+                if (groupId > 0) {
+                    fieldClass += " "+Core.css.th.align.center;
+                }
                 me.field.push({
                     idx : idx,
                     text : conf[i].text || "",
@@ -33,7 +37,7 @@ define([
                     order : Core.var.sort.asc,
                     width : conf[i].width || 100,
                     groupId : groupId,
-                    fieldClass : conf[i].fieldClass || false
+                    fieldClass : fieldClass || false
                 });
                 idx++;
             }

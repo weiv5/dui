@@ -5,20 +5,34 @@ define(function() {
             toolbar : "x-tbl-toolbar",
             content : "x-tbl-content",
             footer : "x-tbl-footer",
-            "td-align" : {
-                center : "td-align-center",
-                right : "td-align-right",
+            td : {
+                align : {
+                    center : "td-align-center",
+                    right : "td-align-right",
+                },
+                highlight : "td-highlight",
             },
-            "th-aliagn" : {
-                center : "th-align-center"
+            th : {
+                align : {
+                    center : "th-align-center",
+                    left : "th-align-left",
+                }
             },
-            highlight : "td-highlight"
+            tr : {
+                d1 : {
+                    init : "tr-d1",
+                    open : "tr-d1-open",
+                    close : "tr-d1-close",
+                },
+                d2 : "tr-d2",
+                sum : "tr-sum"
+            }
         },
         pager : {
             box : "x-widget-pager"
         },
         order : {
-            box : "order",
+            init : "order",
             desc : "order-down",
             asc : "order-up"
         },

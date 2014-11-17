@@ -31,7 +31,7 @@ define([
             if (me.sum.is) {
                 sumData[me.field[me.sum.fieldIndex].dataIndex] = option.sum.text;
                 me.sumData.row = Func.formatSum(sumData, me.field);
-                me.sumData.dom = Func.createTr(me.sumData.row);
+                me.sumData.dom = Func.createTr(me.sumData.row).addClass(Core.css.table.tr.sum);
             }
         },
         render : function(box) {

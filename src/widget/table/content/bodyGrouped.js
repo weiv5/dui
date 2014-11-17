@@ -29,7 +29,7 @@ define([
                 var row = Func.formatRow(option.data[i], me.field);
                 me.data[idx].sub.push({
                     row : row,
-                    dom : Func.createTr(row)
+                    dom : Func.createTr(row).addClass(Core.css.table.tr.d2)
                 });
 
                 for (var j in option.data[i]) {
@@ -48,13 +48,13 @@ define([
             }
             for (var i in me.data) {
                 me.data[i].row = Func.formatRow(me.data[i].row, me.field);
-                me.data[i].dom = Func.createTr(me.data[i].row);
+                me.data[i].dom = Func.createTr(me.data[i].row).addClass(Core.css.table.tr.d1.init);
                 me.bindOpenEvent(me.data[i]);
             }
             if (me.sum.is) {
                 sumData[me.field[me.sum.fieldIndex].dataIndex] = option.sum.text;
                 me.sumData.row = Func.formatSum(sumData, me.field);
-                me.sumData.dom = Func.createTr(me.sumData.row);
+                me.sumData.dom = Func.createTr(me.sumData.row).addClass(Core.css.table.tr.sum);
             }
         },
         render : function(box) {
@@ -116,7 +116,13 @@ define([
         bindOpenEvent : function(item) {
             var me = this;
             item.dom.bind("click", function(e) {
-                item.open = item.open==false ? true : false;
+                if (item.open) {
+                    item.open = false;
+                    item.dom.removeClass(Core.css.table.tr.d1.open).addClass(Core.css.table.tr.d1.close);
+                } else {
+                    item.open = true;
+                    item.dom.removeClass(Core.css.table.tr.d1.close).addClass(Core.css.table.tr.d1.open);
+                }
                 for (var j in item.sub) {
                     if (item.open) {
                         item.sub[j].dom.show();
