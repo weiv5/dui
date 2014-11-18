@@ -20,6 +20,8 @@ define([
             me.toolbar = new Toolbar(me, option);
             me.content = new Content(option);
             me.footer = new Footer(me, option);
+
+            me.render();
         },
         render : function() {
             var me = this;
