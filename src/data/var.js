@@ -6,7 +6,7 @@ define(function() {
         },
         defaultVar : "-",
         sum : {
-            text : "合计",
+            text : "Total",
         },
         valign : {
             top : "top",
