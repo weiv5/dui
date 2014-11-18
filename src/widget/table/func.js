@@ -17,6 +17,9 @@ define([
                 if (row[j].dataClass) {
                     td.addClass(row[j].dataClass);
                 }
+                if (Core.isNumber(row[j].num)) {
+                    td.addClass(Core.css.table.td.align.right);
+                }
                 td.html(row[j].format);
                 tr.append(td);
             }
