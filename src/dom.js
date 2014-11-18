@@ -36,10 +36,10 @@ define(["jquery"], function($) {
             return this;
         },
         html : function(el) {
-            if (typeof el === "string") {
-                this.dom.html(el);
-            } else if (el instanceof Dom) {
+            if (el instanceof Dom) {
                 this.dom.html(el.dom);
+            } else {
+                this.dom.html(el);
             }
             return this;
         },

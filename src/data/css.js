@@ -33,8 +33,8 @@ define(function() {
         },
         sort : {
             init : "order",
-            1 : "order-up",
-            "-1" : "order-down"
+            "-1" : "order-down",
+            "1" : "order-up",
         },
     };
 });

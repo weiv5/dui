@@ -31,8 +31,6 @@ require(["dui"], function(Dui) {
                 format : Dui.format.money,
                 numSwitch : true,
                 isSum : true,
-                dataClass : "dataClass1",
-                fieldClass : ""
             },{
                 text : "订单数",
                 fieldGroup: "销售",

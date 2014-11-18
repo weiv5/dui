@@ -15,7 +15,7 @@ define([
             
             var sum = {
                     text : Core.var.sum.text,
-                    valign : Core.var.sum.valign.bottom,
+                    valign : Core.var.valign.bottom,
                     fieldIndex : 0,
                     is : false
                 },
@@ -84,6 +84,12 @@ define([
         },
         numSwitch : function(stat) {
             this.impl.numSwitch(stat);
+        },
+        light : function(idx) {
+            this.impl.light(idx);
+        },
+        lightOff : function(idx) {
+            this.impl.lightOff(idx);
         },
     };
     return Body;

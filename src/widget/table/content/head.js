@@ -11,6 +11,7 @@ define([
             me.field = [];
             me.fieldGroupMap = [];
             me.fieldGroupCnt = [];
+            me.sortField = -1;
 
             var idx = 0;
             for (var i in conf) {
@@ -30,7 +31,7 @@ define([
                     idx : idx,
                     text : conf[i].text || "",
                     sortable : conf[i].sortable || false,
-                    order : Core.var.sort.asc,
+                    ord : Core.var.sort.asc,
                     width : conf[i].width || 100,
                     groupId : groupId,
                     fieldClass : conf[i].fieldClass || false
@@ -89,11 +90,21 @@ define([
             if (obj.sortable) {
                 obj.dom.addClass(Core.css.sort.init);
                 obj.dom.bind("click", function() {
+                    if (me.sortField > 0 && idx!==me.sortField) {
+                        var last = me.field[me.sortField];
+                        last.dom.removeClass(Core.css.sort[last.ord]);
+                        last.ord = Core.var.sort.asc;
+                        me.table.body.lightOff(last.idx);
+                    }
                     var oCls = Core.css.sort[obj.ord];
                     obj.ord = obj.ord == Core.var.sort.asc ? Core.var.sort.desc : Core.var.sort.asc;
+                    console.log(obj.ord);
                     var nCls = Core.css.sort[obj.ord];
                     obj.dom.removeClass(oCls).addClass(nCls);
+                    console.log(oCls, nCls);
                     me.table.body.sort(idx, obj.ord);
+                    me.sortField = idx;
+                    me.table.body.light(idx);
                 });
             }
         },

@@ -46,7 +46,7 @@ define([
             if (!me.sum.is) {
                 return;
             }
-            if (me.sum.valign === "top") {
+            if (me.sum.valign === Core.var.valign.top) {
                 box.prepend(me.sumData.dom);
             } else {
                 box.append(me.sumData.dom);
@@ -54,6 +54,18 @@ define([
         },
         sort : function(idx, order) {
             Func.sortTr(this.data, idx, order);
+        },
+        light : function(idx) {
+            var me = this;
+            for (var j in me.data) {
+                me.data[j].dom.children(idx).addClass(Core.css.table.td.highlight);
+            }
+        },
+        lightOff : function(idx) {
+            var me = this;
+            for (var j in me.data) {
+                me.data[j].dom.children(idx).removeClass(Core.css.table.td.highlight);
+            }
         },
         numSwitch : function(f) {
             var me = this;
