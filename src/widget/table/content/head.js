@@ -98,10 +98,8 @@ define([
                     }
                     var oCls = Core.css.sort[obj.ord];
                     obj.ord = obj.ord == Core.var.sort.asc ? Core.var.sort.desc : Core.var.sort.asc;
-                    console.log(obj.ord);
                     var nCls = Core.css.sort[obj.ord];
                     obj.dom.removeClass(oCls).addClass(nCls);
-                    console.log(oCls, nCls);
                     me.table.body.sort(idx, obj.ord);
                     me.sortField = idx;
                     me.table.body.light(idx);
