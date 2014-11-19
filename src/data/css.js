@@ -29,7 +29,8 @@ define(function() {
             }
         },
         pager : {
-            box : "x-widget-pager"
+            box : "x-widget-pager",
+            disabled : "disabled",
         },
         sort : {
             init : "order",

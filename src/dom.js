@@ -59,6 +59,10 @@ define(["jquery"], function($) {
             }
             return this;
         },
+        after : function(el) {
+            this.dom.after(el.dom);
+            return this;
+        },
         empty : function() {
             this.dom.empty();
             return this;

@@ -11,6 +11,10 @@ define(function() {
         valign : {
             top : "top",
             bottom : "bottom"
+        },
+        pager : {
+            prev : "Prev",
+            next : "Next",
         }
     };
 });

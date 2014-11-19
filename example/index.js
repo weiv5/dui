@@ -89,10 +89,17 @@ require(["dui"], function(Dui) {
         ]
     };
     var table = new Dui.table("#tbl", option);
-    table.render();
 
     option.dataGroup = {dataIndex:"brand"};
     option.sum.valign = "bottom";
     var table2 = new Dui.table("#tbl2", option);
-    table2.render();
+
+    var pager = new Dui.pager("#pager", {
+        pageNum : 10,
+        showNum : 5,
+        edgeNum : 1,
+        onSelect : function(page) {
+            console.log(page);
+        },
+    });
 });
