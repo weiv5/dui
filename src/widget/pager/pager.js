@@ -6,8 +6,13 @@ define([
     }
     Pager.prototype = {
         init : function(outerId, option) {
-            var me = this,
-                outer = Core.dom.get(outerId);
+            var me = this;
+
+            me.pageNum = option.pageNum || 1;
+            if (me.pageNum <= 1) {
+                return;
+            }
+            var outer = Core.dom.get(outerId);
             if (outer === null) {
                 Core.error(1);
             }
@@ -16,19 +21,16 @@ define([
             outer.append(box);
             me.pageList = new Core.dom("div");
             box.append(me.pageList);
+            me.rendered = false;
 
-            me.pageNum = option.pageNum || 1;
             me.showNum = option.showNum || 5;
             me.edgeNum = option.edgeNum || 1;
-            if (me.pageNum <= 1) {
-                return;
+            me.onSelect = option.onSelect || false;
+            me.last = me.pageNum-1;
+            me.current = option.current || 0;
+            if (me.current > me.last) {
+                me.current = 0;
             }
-            me.prev = me.createBtn(option.prevText || Core.var.pager.prev, "prev");
-            me.next = me.createBtn(option.nextText || Core.var.pager.next, "next");
-            me.dot = "...";
-            box.prepend(me.prev);
-            box.append(me.next);
-
             var middle = (me.showNum-1)/2;
             if (me.showNum%2==1) {
                 me.left = me.right = middle;
@@ -36,8 +38,12 @@ define([
                 me.left = Math.floor(middle);
                 me.right = Math.ceil(middle);
             }
-            me.current = 1;
-            me.last = me.pageNum;
+            me.dot = "...";
+
+            me.prev = me.createBtn(option.prevText || Core.var.pager.prev, "prev");
+            box.prepend(me.prev);
+            me.next = me.createBtn(option.nextText || Core.var.pager.next, "next");
+            box.append(me.next);
 
             me.render();
         },
@@ -45,7 +51,7 @@ define([
             var me = this,
                 btn = new Core.dom("a");
             btn.text(text);
-            if (typeof to !== "undefined") {
+            if (to !== "undefined" && to !== false) {
                 btn.bind("click", function() {
                     me.selectPage(to);
                 });
@@ -54,64 +60,41 @@ define([
         },
         render : function() {
             var me = this;
+            if (me.pageNum <= me.showNum+me.edgeNum && me.rendered) {
+                return;
+            }
             me.pageList.empty();
-            if (me.current > me.left+me.edgeNum+1) {
-                for (var i=1; i<=me.edgeNum; i++) {
-                    me.pageList.append(me.createBtn(i, i));
-                }
+
+            var leftIdx = Math.max(0, me.current-me.left),
+                rightIdx = Math.min(leftIdx+me.showNum-1, me.last);
+            if (rightIdx==me.last) {
+                leftIdx = rightIdx-me.showNum+1;
+            }
+            var edge = Math.min(me.edgeNum, leftIdx);
+            for (var i=0; i<edge; i++) {
+                me.pageList.append(me.createBtn(i+1, i));
+            }
+            if (leftIdx > me.edgeNum) {
                 me.pageList.append(me.createBtn(me.dot));
-                if (me.current+me.right+me.edgeNum >= me.last) {
-                    var n = me.showNum-(me.last-me.current);
-                } else {
-                    var n = me.left;
-                }
-                for (var i=n; i>0; i--) {
-                    me.pageList.append(me.createBtn(me.current-i, me.current-i));
-                }
-                var left = me.right;
-            } else {
-                var n = me.current-1;
-                for (var i=1; i<=n; i++) {
-                    me.pageList.append(me.createBtn(i, i));
-                }
-                if (me.current == me.left+me.edgeNum+1) {
-                    var left = me.right;
-                } else {
-                    var left = me.showNum-me.current;
-                }
             }
-            me.pageList.append(me.createBtn(me.current));
-            console.log(me.current);
-            if (me.current+me.right+me.edgeNum < me.last) {
-                for (var i=1; i<=left; i++) {
-                    me.pageList.append(me.createBtn(me.current+i, me.current+i));
-                }
+            for (var i=leftIdx; i<=rightIdx; i++) {
+                var to = (i == me.current) ? false : i;
+                me.pageList.append(me.createBtn(i+1, to));
+            }
+            if (rightIdx < me.last-me.edgeNum) {
                 me.pageList.append(me.createBtn(me.dot));
-                for (var i=me.edgeNum-1; i>=0; i--) {
-                    me.pageList.append(me.createBtn(me.last-i, me.last-i));
-                }
-            } else {
-                var n = me.last-me.current;
-                for (var i=1; i<=n; i++) {
-                    me.pageList.append(me.createBtn(me.current+i, me.current+i));
-                }
             }
-            if (me.current == 1) {
-                me.prev.addClass(Core.css.pager.disabled);
-            } else {
-                me.prev.removeClass(Core.css.pager.disabled);
+            var edge = Math.min(me.edgeNum, me.last-rightIdx);
+            for (var i=edge-1; i>=0; i--) {
+                me.pageList.append(me.createBtn(me.last-i+1, me.last-i));
             }
-            if (me.current == me.last) {
-                me.next.addClass(Core.css.pager.disabled);
-            } else {
-                me.next.removeClass(Core.css.pager.disabled);
-            }
+            me.rendered = true;
         },
         selectPage : function(to) {
             var me = this;
             switch (to) {
                 case "prev":
-                    if (me.current > 1) {
+                    if (me.current > 0) {
                         me.current -= 1;
                     } else {
                         return;
@@ -129,6 +112,9 @@ define([
                     break;
             }
             me.render();
+            if (typeof me.onSelect === "function") {
+                me.onSelect(me.current);
+            }
         },
     };
     Core.extend({

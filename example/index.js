@@ -95,9 +95,10 @@ require(["dui"], function(Dui) {
     var table2 = new Dui.table("#tbl2", option);
 
     var pager = new Dui.pager("#pager", {
-        pageNum : 10,
+        pageNum : 20,
         showNum : 5,
         edgeNum : 1,
+        current : 1,
         onSelect : function(page) {
             console.log(page);
         },
