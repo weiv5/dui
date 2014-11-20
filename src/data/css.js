@@ -2,7 +2,7 @@ define(function() {
     return {
         table : {
             box : "x-tbl",
-            toolbar : "x-tbl-toolbar",
+            toolbar : "x-tbl-tools",
             content : "x-tbl-content",
             footer : "x-tbl-footer",
             td : {
@@ -26,6 +26,14 @@ define(function() {
                 },
                 d2 : "tr-d2",
                 sum : "tr-sum"
+            },
+            realwidth : "x-tbl-realwidth",
+            bigfont : {
+                icon : "tools-icon-font",
+                biger : "x-tbl-bigfont"
+            },
+            numswitch : {
+                icon : "tools-icon-number-switch"
             }
         },
         pager : {

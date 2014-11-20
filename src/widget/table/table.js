@@ -16,6 +16,9 @@ define([
             }
             me.box = new Core.dom("div");
             me.box.addClass(Core.css.table.box);
+            if (option.realwidth || false) {
+                me.box.addClass(Core.css.table.realwidth);
+            }
 
             me.toolbar = new Toolbar(me, option);
             me.content = new Content(option);

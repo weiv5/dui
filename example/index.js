@@ -7,6 +7,7 @@ require.config({
 });
 require(["dui"], function(Dui) {
     var option = {
+//        realwidth : true,
         sum : {
             valign : "top", // top bottom
             //fieldIndex : 0,

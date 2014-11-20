@@ -20,8 +20,8 @@ define([
         },
         render : function(box) {
             var me = this,
-                dom = new Core.dom("a");
-            dom.text("switch");
+                dom = new Core.dom("span");
+            dom.addClass(Core.css.table.numswitch.icon);
             dom.bind("click", function() {
                 me.switchStat = me.switchStat == "num" ? "format" : "num";
                 me.table.content.body.numSwitch(me.switchStat);
