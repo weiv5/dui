@@ -31,6 +31,8 @@ define(function() {
         pager : {
             box : "x-widget-pager",
             disabled : "disabled",
+            current : "current",
+            dots : "dots",
         },
         sort : {
             init : "order",

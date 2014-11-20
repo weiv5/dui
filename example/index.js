@@ -98,7 +98,7 @@ require(["dui"], function(Dui) {
         pageNum : 20,
         showNum : 5,
         edgeNum : 1,
-        current : 1,
+        current : 0,
         onSelect : function(page) {
             console.log(page);
         },

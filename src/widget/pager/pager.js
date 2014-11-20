@@ -38,13 +38,12 @@ define([
                 me.left = Math.floor(middle);
                 me.right = Math.ceil(middle);
             }
-            me.dot = "...";
 
             me.prev = me.createBtn(option.prevText || Core.var.pager.prev, "prev");
             box.prepend(me.prev);
             me.next = me.createBtn(option.nextText || Core.var.pager.next, "next");
             box.append(me.next);
-
+            
             me.render();
         },
         createBtn : function(text, to) {
@@ -75,18 +74,33 @@ define([
                 me.pageList.append(me.createBtn(i+1, i));
             }
             if (leftIdx > me.edgeNum) {
-                me.pageList.append(me.createBtn(me.dot));
+                me.pageList.append(me.createBtn(Core.var.pager.dots).addClass(Core.css.pager.dots));
             }
             for (var i=leftIdx; i<=rightIdx; i++) {
-                var to = (i == me.current) ? false : i;
-                me.pageList.append(me.createBtn(i+1, to));
+                if (i == me.current) {
+                    var cur = me.createBtn(i+1, false);
+                    cur.addClass(Core.css.pager.current);
+                } else {
+                    var cur = me.createBtn(i+1, i);
+                }
+                me.pageList.append(cur);
             }
             if (rightIdx < me.last-me.edgeNum) {
-                me.pageList.append(me.createBtn(me.dot));
+                me.pageList.append(me.createBtn(Core.var.pager.dots).addClass(Core.css.pager.dots));
             }
             var edge = Math.min(me.edgeNum, me.last-rightIdx);
             for (var i=edge-1; i>=0; i--) {
                 me.pageList.append(me.createBtn(me.last-i+1, me.last-i));
+            }
+            if (me.current == 0) {
+                me.prev.addClass(Core.css.pager.disabled);
+            } else {
+                me.prev.removeClass(Core.css.pager.disabled);
+            }
+            if (me.current == me.last) {
+                me.next.addClass(Core.css.pager.disabled);
+            } else {
+                me.next.removeClass(Core.css.pager.disabled);
             }
             me.rendered = true;
         },

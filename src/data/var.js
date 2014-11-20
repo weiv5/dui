@@ -15,6 +15,7 @@ define(function() {
         pager : {
             prev : "Prev",
             next : "Next",
+            dots : "...",
         }
     };
 });
