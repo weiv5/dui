@@ -52,7 +52,7 @@ define([
             var isGroup = false;
             if (Core.isObject(option.dataGroup)) {
                 var fieldIndex = option.dataGroup.fieldIndex || 0;
-                if (Core.isNumber(fieldIndex) && Core.isString(option.dataGroup.dataIndex) && Core.isObject(option.field[fieldIndex])) {
+                if (Core.isNumber(fieldIndex) && Core.isString(option.dataGroup.dataIndex) && Core.isObject(option.field[fieldIndex]) && option.dataGroup.dataIndex) {
                     isGroup = true;
                     group.fieldIndex = option.field[fieldIndex].dataIndex;
                     group.dataIndex = option.dataGroup.dataIndex;
