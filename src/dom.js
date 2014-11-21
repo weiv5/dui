@@ -82,6 +82,18 @@ define(["jquery"], function($) {
             this.dom.show();
             return this;
         },
+        top : function() {
+            return this.dom.offset().top;
+        },
+        right : function() {
+            return this.dom.offset().right;
+        },
+        width : function() {
+            return this.dom.width();
+        },
+        height : function() {
+            return this.dom.height();
+        },
     };
     return Dom;
 });
