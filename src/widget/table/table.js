@@ -2,8 +2,7 @@ define([
     "../../core",
     "./toolbar/toolbar",
     "./content/content",
-    "./footer"
-], function(Core, Toolbar, Content, Footer) {
+], function(Core, Toolbar, Content) {
     function Table() {
         this.init.apply(this, arguments);
     }
@@ -22,15 +21,13 @@ define([
 
             me.toolbar = new Toolbar(me, option);
             me.content = new Content(option);
-            me.footer = new Footer(me, option);
 
             me.render();
         },
         render : function() {
             var me = this;
-            me.toolbar.render(me.box);
+            me.toolbar.render(Core.dom.get("body"));
             me.content.render(me.box);
-            me.footer.render(me.box);
             me.outer.append(me.box);
         }
     };
