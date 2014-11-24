@@ -14,7 +14,7 @@ define([
             me.box.addClass(Core.css.table.content);
             me.table = new Core.dom("table");
 
-            me.head = new Head(me, option.field);
+            me.head = new Head(me, option);
             me.body = new Body(me, option);
         },
         render : function(box) {

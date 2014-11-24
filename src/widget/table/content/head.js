@@ -5,15 +5,17 @@ define([
         this.init.apply(this, arguments);
     }
     Head.prototype = {
-        init : function(table, conf) {
+        init : function(table, option) {
             var me = this;
             me.table = table;
             me.field = [];
             me.fieldGroupMap = [];
             me.fieldGroupCnt = [];
             me.sortField = -1;
+            me.fixed = option.head.fixed || false;
 
-            var idx = 0;
+            var conf = option.field,
+                idx = 0;
             for (var i in conf) {
                 var groupId = -1;
                 if (typeof conf[i].fieldGroup !== "undefined") {
@@ -75,7 +77,7 @@ define([
                     th2.addClass(me.field[i].fieldClass);
                 }
                 me.field[i].dom = th2;
-                me.bindEvent(i);
+                me.bindThEvent(i);
             }
             if (me.isFieldGroup) {
                 thead.append(tr1);
@@ -83,8 +85,38 @@ define([
             thead.append(tr2);
             box.append(colgroup);
             box.append(thead);
+            me.thead = thead;
+            me.colgroup = colgroup;
+            me.bindFixedEvent();
         },
-        bindEvent : function(idx) {
+        bindFixedEvent : function() {
+            var me = this;
+            if (!me.fixed) {
+                return;
+            }
+            var body = Core.dom.get("body"),
+                doc = Core.dom.get(document),
+                box = new Core.dom("div");
+            box.hide();
+            box.css({position: "absolute"});
+            box.append(me.colgroup.clone(true));
+            box.append(me.thead.clone(true));
+            body.append(box);
+            doc.bind("scroll", function() {
+                var show = me.table.box.top();
+                var hide = show+me.table.box.height()-me.thead.height();
+                var t = doc.scrollTop();
+                if (t >= show && t < hide) {
+                    box.show().css({top: t});
+                } else {
+                    box.hide();
+                }
+                if (t >= hide) {
+                    box.hide();
+                }
+            });
+        },
+        bindThEvent : function(idx) {
             var me = this;
             var obj = me.field[idx];
             if (obj.sortable) {

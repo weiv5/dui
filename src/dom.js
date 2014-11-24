@@ -97,6 +97,13 @@ define(["jquery"], function($) {
         height : function() {
             return this.dom.height();
         },
+        scrollTop : function() {
+            return this.dom.scrollTop();
+        },
+        clone : function(isEvent) {
+            isEvent = isEvent || false;
+            return new Dom(this.dom.clone(isEvent));
+        },
     };
     return Dom;
 });

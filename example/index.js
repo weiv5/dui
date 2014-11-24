@@ -8,10 +8,14 @@ require.config({
 require(["dui"], function(Dui) {
     var option = {
 //        realwidth : true,
+        head : {
+            fixed : true
+        },
         sum : {
             valign : "top", // top bottom
             //fieldIndex : 0,
-            //text : "sum"
+            //text : "sum",
+            //fixed : true
         },
         /*
         dataGroup : {
