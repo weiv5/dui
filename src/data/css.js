@@ -7,6 +7,7 @@ define(function() {
             footer : "x-tbl-footer",
             td : {
                 align : {
+                    left : "td-align-left",
                     center : "td-align-center",
                     right : "td-align-right",
                 },

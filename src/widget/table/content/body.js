@@ -38,7 +38,8 @@ define([
                     formula : option.field[i].formula || false,
                     dataIndex : option.field[i].dataIndex,
                     isSum : option.field[i].isSum || false,
-                    dataClass : option.field[i].dataClass || false
+                    dataClass : option.field[i].dataClass || false,
+                    align : option.field[i].align || "right",
                 };
                 field.push(f);
                 if (f.isSum) {

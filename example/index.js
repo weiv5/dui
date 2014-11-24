@@ -23,6 +23,7 @@ require(["dui"], function(Dui) {
             {
                 text : "名称",
                 dataIndex : "name",
+                align : "left"
             },{
                 text : "金额",
                 fieldGroup: "销售",

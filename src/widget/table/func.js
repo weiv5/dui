@@ -17,7 +17,11 @@ define([
                 if (row[j].dataClass) {
                     td.addClass(row[j].dataClass);
                 }
-                if (Core.isNumber(row[j].num)) {
+                if (row[j].align) {
+                    if (typeof Core.css.table.td.align[row[j].align] !== "undefined") {
+                        td.addClass(Core.css.table.td.align[row[j].align]);
+                    }
+                } else if (Core.isNumber(row[j].num)) {
                     td.addClass(Core.css.table.td.align.right);
                 }
                 td.html(row[j].format);
@@ -44,7 +48,7 @@ define([
                 if (num === Core.var.defaultVar) {
                     num = 0;
                 }
-                row.push({format: format, num: num, dataClass: field[i].dataClass});
+                row.push({format: format, num: num, dataClass: field[i].dataClass, align: field[i].align});
             }
             return row;
         },
@@ -68,7 +72,7 @@ define([
                 } else {
                     var format = num;
                 }
-                row.push({format: format, num: num, dataClass: field[i].dataClass});
+                row.push({format: format, num: num, dataClass: field[i].dataClass, align: field[i].align});
             }
             return row;
         },
