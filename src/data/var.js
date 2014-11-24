@@ -16,6 +16,9 @@ define(function() {
             prev : "Prev",
             next : "Next",
             dots : "...",
+        },
+        toolbar : {
+            right : 24
         }
     };
 });

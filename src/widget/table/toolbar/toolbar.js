@@ -47,7 +47,7 @@ define([
                 return;
             }
             var top = me.table.box.top()-me.box.height(),
-                left = me.table.box.right()-100;
+                left = me.table.box.left()+me.table.box.width()-me.box.width()-Core.var.toolbar.right;
             me.box.css({top:top, left:left}).show();
         },
         closeBar : function() {

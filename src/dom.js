@@ -85,6 +85,9 @@ define(["jquery"], function($) {
         top : function() {
             return this.dom.offset().top;
         },
+        left : function() {
+            return this.dom.offset().left;
+        },
         right : function() {
             return this.dom.offset().right;
         },
