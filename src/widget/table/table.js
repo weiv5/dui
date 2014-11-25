@@ -29,7 +29,6 @@ define([
             me.toolbar.render(Core.dom.get("body"));
             me.head.render(me.box);
             me.body.render(me.box);
-            me.outer.append(me.box);
         },
         createBox : function() {
             var me = this,
@@ -40,6 +39,7 @@ define([
             }
             me.box = new Core.dom("table");
             outer.append(me.box);
+            me.outer.append(outer);
         },
     };
     Core.extend({

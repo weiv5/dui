@@ -12,7 +12,12 @@ define([
             me.fieldGroupMap = [];
             me.fieldGroupCnt = [];
             me.sortField = -1;
-            me.fixed = option.head.fixed || false;
+            me.fixed = false;
+            me.top = 0;
+            if (typeof option.head !== "undefined") {
+                me.fixed = option.head.fixed || false;
+                me.top = option.head.top || 0;
+            }
 
             var conf = option.field,
                 idx = 0;
@@ -96,24 +101,25 @@ define([
             }
             var body = Core.dom.get("body"),
                 doc = Core.dom.get(document),
-                box = new Core.dom("div");
-            box.hide();
-            box.css({position: "absolute"});
+                outer = new Core.dom("div");
+            outer.addClass(Core.css.table.box);
+            body.append(outer);
+            var box = new Core.dom("table");
+            outer.append(box).css({position: "absolute"}).hide();
             box.append(me.colgroup.clone(true));
             box.append(me.thead.clone(true));
-            body.append(box);
             doc.bind("scroll", function() {
                 var show = me.table.box.top(),
-                    hide = me.table.box.top() + me.table.box.height() - me.thead.height(),
+                    hide = me.table.box.top() + me.table.box.height() - me.thead.height() + me.top,
                     l = me.table.box.left(),
-                    t = doc.scrollTop();
-                if (t > show && t < hide) {
-                    box.show().css({top: t, left: l});
+                    t = doc.scrollTop() + me.top;
+                if (t >= show && t < hide) {
+                    outer.show().css({top: t, left: l});
                 } else {
-                    box.hide();
+                    outer.hide();
                 }
                 if (t >= hide) {
-                    box.hide();
+                    outer.hide();
                 }
             });
         },
