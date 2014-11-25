@@ -24,7 +24,7 @@ define([
             dom.addClass(Core.css.table.numswitch.icon);
             dom.bind("click", function() {
                 me.switchStat = me.switchStat == "num" ? "format" : "num";
-                me.table.content.body.numSwitch(me.switchStat);
+                me.table.body.numSwitch(me.switchStat);
             });
             box.append(dom);
         },
