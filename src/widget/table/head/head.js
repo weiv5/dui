@@ -88,10 +88,16 @@ define([
                 thead.append(tr1);
             }
             thead.append(tr2);
-            box.append(colgroup);
-            box.append(thead);
-            me.thead = thead;
-            me.colgroup = colgroup;
+
+            var container = me.table.createTblDom();
+            container.box.append(colgroup);
+            container.box.append(thead);
+            me.xtbl = container.xtbl;
+
+            me.header = new Core.dom("div");
+            me.header.addClass(Core.css.table.header);
+            me.header.append(container.xtbl);
+            box.prepend(me.header);
             me.bindFixedEvent();
         },
         bindFixedEvent : function() {
@@ -99,30 +105,21 @@ define([
             if (!me.fixed) {
                 return;
             }
-            var body = Core.dom.get("body"),
-                doc = Core.dom.get(document),
-                outer = new Core.dom("div");
-            outer.addClass(Core.css.table.box).css({position: "absolute", width: me.table.xtbl.width()}).hide();
-            body.append(outer);
-            var content = new Core.dom("div");
-            content.addClass(Core.css.table.content);
-            outer.append(content);
-            var box = new Core.dom("table");
-            content.append(box)
-            box.append(me.colgroup.clone(true));
-            box.append(me.thead.clone(true));
+            var doc = Core.dom.get(document),
+                show = me.header.top(),
+                hide = me.header.top() + me.top;
+                left = me.table.xtbl.left(),
+                htop = me.top;
+                btop = me.header.height() + me.top;
             doc.bind("scroll", function() {
-                var show = me.table.xtbl.top(),
-                    hide = me.table.xtbl.top() + me.table.xtbl.height() - me.thead.height() + me.top,
-                    l = me.table.xtbl.left(),
-                    t = doc.scrollTop() + me.top;
-                if (t >= show && t < hide) {
-                    outer.show().css({top: t, left: l});
+                var t = doc.scrollTop(),
+                    h = hide + me.table.box.height();
+                if (t >= show && t < h) {
+                    me.header.css({position: "fixed", top: htop});
+                    me.table.xtbl.css({"margin-top": btop});
                 } else {
-                    outer.hide();
-                }
-                if (t >= hide) {
-                    outer.hide();
+                    me.header.css({position: ""});
+                    me.table.xtbl.css({"margin-top": 0});
                 }
             });
         },

@@ -3,6 +3,7 @@ define(function() {
         table : {
             box : "x-tbl",
             toolbar : "x-tbl-tools",
+            header : "x-tbl-header",
             content : "x-tbl-content",
             footer : "x-tbl-footer",
             td : {

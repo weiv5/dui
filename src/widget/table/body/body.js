@@ -10,6 +10,7 @@ define([
         init : function(table, option) {
             var me = this;
             me.table = table;
+            me.colgroup = new Core.dom("colgroup");
             me.tbody = new Core.dom("tbody");
             me.impl = null;
             
@@ -41,6 +42,9 @@ define([
                     dataClass : option.field[i].dataClass || false,
                     align : option.field[i].align || "right",
                 };
+                var col = new Core.dom("col");
+                me.colgroup.append(col.attr("width", option.field[i].width || 100));
+
                 field.push(f);
                 if (f.isSum) {
                     sum.is = true;
@@ -74,9 +78,9 @@ define([
         },
         render : function(box) {
             var me = this;
-            me.tbody.empty();
-            me.impl.render(me.tbody);
+            box.append(me.colgroup);
             box.append(me.tbody);
+            me.impl.render(me.tbody);
         },
         sort : function(idx, order) {
             var me = this;
