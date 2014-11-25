@@ -1,5 +1,5 @@
 define([
-    "../../core"
+    "../../../core"
 ],function(Core) {
     return {
         sortTr : function(trs, idx, order) {

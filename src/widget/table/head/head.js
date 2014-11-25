@@ -104,10 +104,11 @@ define([
             body.append(box);
             doc.bind("scroll", function() {
                 var show = me.table.box.top(),
-                    hide = show+me.table.box.height()-me.thead.height(),
+                    hide = me.table.box.top() + me.table.box.height() - me.thead.height(),
+                    l = me.table.box.left(),
                     t = doc.scrollTop();
-                if (t >= show && t < hide) {
-                    box.show().css({top: t});
+                if (t > show && t < hide) {
+                    box.show().css({top: t, left: l});
                 } else {
                     box.hide();
                 }

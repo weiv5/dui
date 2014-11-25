@@ -42,13 +42,10 @@ define([
             box.append(me.box);
         },
         showBar : function() {
-            var me = this;
-            if (me.show) {
-                return;
-            }
-            var top = me.table.box.top()-me.box.height(),
-                left = me.table.box.left()+me.table.box.width()-me.box.width()-Core.var.toolbar.right;
-            me.box.css({top:top, left:left}).show();
+            var me = this,
+                t = me.table.box.top()-me.box.height(),
+                l = me.table.box.left()+me.table.box.width()-me.box.width()-Core.var.toolbar.right;
+            me.box.css({top:t, left:l}).show();
         },
         closeBar : function() {
             var me = this;

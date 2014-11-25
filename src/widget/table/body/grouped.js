@@ -1,6 +1,6 @@
 define([
     "../../../core",
-    "../func"
+    "./func"
 ], function(Core, Func) {
     function Grouped() {
         this.init.apply(this, arguments);

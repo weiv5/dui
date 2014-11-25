@@ -1,6 +1,6 @@
 define([
     "../../../core",
-    "../func"
+    "./func"
 ], function(Core, Func) {
     function Lineal() {
         this.init.apply(this, arguments);
