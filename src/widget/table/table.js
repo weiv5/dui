@@ -31,15 +31,18 @@ define([
             me.body.render(me.box);
         },
         createBox : function() {
-            var me = this,
-                outer = new Core.dom("div");
-            outer.addClass(Core.css.table.box);
+            var me = this;
+            me.xtbl = new Core.dom("div");
+            me.xtbl.addClass(Core.css.table.box);
             if (me.realwidth) {
-                outer.addClass(Core.css.table.realwidth);
+                me.xtbl.addClass(Core.css.table.realwidth);
             }
+            var content = new Core.dom("div");
+            content.addClass(Core.css.table.content);
+            me.xtbl.append(content);
+            me.outer.append(me.xtbl);
             me.box = new Core.dom("table");
-            outer.append(me.box);
-            me.outer.append(outer);
+            content.append(me.box);
         },
     };
     Core.extend({

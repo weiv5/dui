@@ -102,16 +102,19 @@ define([
             var body = Core.dom.get("body"),
                 doc = Core.dom.get(document),
                 outer = new Core.dom("div");
-            outer.addClass(Core.css.table.box);
+            outer.addClass(Core.css.table.box).css({position: "absolute", width: me.table.xtbl.width()}).hide();
             body.append(outer);
+            var content = new Core.dom("div");
+            content.addClass(Core.css.table.content);
+            outer.append(content);
             var box = new Core.dom("table");
-            outer.append(box).css({position: "absolute"}).hide();
+            content.append(box)
             box.append(me.colgroup.clone(true));
             box.append(me.thead.clone(true));
             doc.bind("scroll", function() {
-                var show = me.table.box.top(),
-                    hide = me.table.box.top() + me.table.box.height() - me.thead.height() + me.top,
-                    l = me.table.box.left(),
+                var show = me.table.xtbl.top(),
+                    hide = me.table.xtbl.top() + me.table.xtbl.height() - me.thead.height() + me.top,
+                    l = me.table.xtbl.left(),
                     t = doc.scrollTop() + me.top;
                 if (t >= show && t < hide) {
                     outer.show().css({top: t, left: l});
