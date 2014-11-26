@@ -10,11 +10,13 @@ define([
         init : function(table, option) {
             var me = this;
             me.table = table;
-            me.fixed = false;
+            me.fixed = true;
             me.top = 0;
             if (typeof option.head !== "undefined") {
                 me.top = option.head.top || 0;
-                me.fixed = option.head.fixed || false;
+                if (typeof option.head.fixed !== "undefined") {
+                    me.fixed = option.head.fixed;
+                }
             }
 
             me.toolbar = new Toolbar(table, option);
