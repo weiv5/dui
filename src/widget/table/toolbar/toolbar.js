@@ -13,7 +13,7 @@ define([
 
             me.table = table;
             me.box = new Core.dom("div");
-            me.box.addClass(Core.css.table.toolbar).hide();
+            me.box.addClass(Core.css.table.toolbar);
             me.show = false;
             me.closeT = null;
 
@@ -24,6 +24,8 @@ define([
             var me = this;
             me.bigfont.render(me.box);
             me.numSwitch.render(me.box);
+            box.append(me.box);
+            return;
             me.box.bind("mouseenter", function() {
                 me.show = true;
             });
@@ -39,7 +41,6 @@ define([
                 me.closeBar();
                 me.show = false;
             });
-            box.append(me.box);
         },
         showBar : function() {
             var me = this,

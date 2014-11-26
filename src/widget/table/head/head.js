@@ -13,8 +13,8 @@ define([
             me.fixed = false;
             me.top = 0;
             if (typeof option.head !== "undefined") {
-                me.fixed = option.head.fixed || false;
                 me.top = option.head.top || 0;
+                me.fixed = option.head.fixed || false;
             }
 
             me.toolbar = new Toolbar(table, option);
@@ -24,10 +24,11 @@ define([
             var me = this;
             me.box = new Core.dom("div");
             me.box.addClass(Core.css.table.header);
+            me.box.css({width: me.table.xtbl.width()});
+            box.prepend(me.box);
 
             me.toolbar.render(me.box);
             me.thead.render(me.box);
-            box.prepend(me.box);
             me.bindEvent();
         },
         bindEvent : function() {
@@ -36,11 +37,12 @@ define([
                 return;
             }
             var doc = Core.dom.get(document),
-                show = me.box.top(),
-                hide = me.box.top() + me.top;
+                show = me.box.top()-me.top,
+                hide = me.box.top(),
                 left = me.table.xtbl.left(),
                 htop = me.top,
-                btop = me.box.height() + me.top;
+                btop = me.box.height();
+            console.log(btop);
             doc.bind("scroll", function() {
                 var t = doc.scrollTop(),
                     h = hide + me.table.box.height();
