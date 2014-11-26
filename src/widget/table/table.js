@@ -23,8 +23,8 @@ define([
         },
         render : function() {
             var me = this;
-            me.body.render(me.box);
             me.head.render(me.xtbl);
+            me.body.render(me.box);
         },
         createBox : function() {
             var me = this;
