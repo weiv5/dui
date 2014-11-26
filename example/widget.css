@@ -1,0 +1,45 @@
+/* .x-box */
+.x-box {margin:20px 10px; border-radius:3px; background:#fff;}
+.x-box-content:after {clear:both; display:block; height:0; content:'.'; overflow:hidden;}
+
+/* .x-tbl */
+.x-tbl {position:relative; font-size:12px; line-height:1.5;}
+.x-tbl table {width:100%; table-layout:fixed; border-spacing:0; border-collapse:collapse; background:#fff;}
+.x-tbl table th,
+.x-tbl table td {margin:0; padding:6px; border:1px solid #d6d6d6; border-top:0; border-left:0; font-weight:normal; text-align:left;}
+.x-tbl table th:last-child,
+.x-tbl table td:last-child {border-right:0;}
+.x-tbl table tbody tr:last-child td {border-bottom:0;}
+.x-tbl table tbody tr:not(.tr-d1-open):not(.tr-sum):hover td {background-color:#f8f8f8;}
+/* .x-tbl-realwidth */
+.x-tbl-realwidth {float:left;}
+.x-tbl-realwidth table {width:auto;}
+/* .x-tbl-bigfont */
+.x-tbl-bigfont {font-size:14px;}
+/* .x-tbl th */
+.x-tbl table th {background:#f0f0f0;}
+.x-tbl table .th-align-center {text-align:center;}
+.x-tbl table th.order:after {float:right; font-family:'fa'; content:'\f0dc'; opacity:.2;}
+.x-tbl table th.order-up:after {content:'\f0d8'; opacity:1;}
+.x-tbl table th.order-down:after {content:'\f0d7'; opacity:1;}
+/* .x-tbl tr */
+.x-tbl table .tr-d1 td:first-child:before {float:left; width:15px; text-align:center; font-family:'fa'; content:'\f105'; opacity:.4;}
+.x-tbl table .tr-d1-open td {color:#c00; background:#f9f2f4;}
+.x-tbl table .tr-d1-open td:first-child:before {content:'\f107'; opacity:1;}
+.x-tbl table .tr-d2 td:first-child {padding-left:20px;}
+.x-tbl table .tr-sum td {background:#e1f1fa; color:#20638f;}
+/* .x-tbl td */
+.x-tbl table .td-align-right {text-align:right;}
+.x-tbl table .td-align-center {text-align:center;}
+.x-tbl table .td-highlight {background-color:rgba(255,251,194,0.7);}
+/* .x-tbl-content */
+.x-tbl-content {overflow:auto; border:1px solid #d6d6d6;}
+/* .x-tbl-tools */
+.x-tbl-tools {position:absolute; height:24px; border:1px solid #d6d6d6; border-bottom:0; border-radius:2px 2px 0 0; background:#fff;}
+.x-tbl-tools span {position:relative; float:left; width:24px; height:24px; line-height:24px; border-right:1px solid #d6d6d6; text-align:center; opacity:.4;}
+.x-tbl-tools span:hover {opacity:.8;}
+.x-tbl-tools span:last-child {border:0;}
+.x-tbl-tools span:after {font-family:'fa';}
+.x-tbl-tools .tools-icon-font:after {content:'\f031';}
+.x-tbl-tools .tools-icon-number-switch:after {content:'\f021';}
+.x-tbl-tools .tools-icon-print:after {content:'\f02f';}
