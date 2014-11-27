@@ -38,6 +38,9 @@ define([
                 } else if (typeof data[field[i].dataIndex] !== "undefined") {
                     num = data[field[i].dataIndex];
                 }
+                if (Core.isNumber(num)) {
+                    num = parseFloat(num);
+                }
                 if (Core.isNaN(num)) {
                     num = Core.var.defaultVar;
                 }
