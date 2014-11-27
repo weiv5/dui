@@ -57,10 +57,10 @@ define([
             for (var i in field) {
                 var num = Core.var.defaultVar;
                 if (field[i].isSum) {
-                    if (typeof data[field[i].dataIndex] !== "undefined") {
-                        num = data[field[i].dataIndex];
-                    } else if (typeof field[i].formula === "function") {
+                    if (typeof field[i].formula === "function") {
                         num = field[i].formula(data);
+                    } else if (typeof data[field[i].dataIndex] !== "undefined") {
+                        num = data[field[i].dataIndex];
                     }
                     if (Core.isNaN(num)) {
                         num = Core.var.defaultVar;
