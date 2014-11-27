@@ -34,7 +34,7 @@ define([
             for (var i in field) {
                 var num = Core.var.defaultVar;
                 if (typeof field[i].formula === "function") {
-                    num = field[i].formula(data);
+                    num = field[i].formula(data, false);
                 } else if (typeof data[field[i].dataIndex] !== "undefined") {
                     num = data[field[i].dataIndex];
                 }
@@ -58,7 +58,7 @@ define([
                 var num = Core.var.defaultVar;
                 if (field[i].isSum) {
                     if (typeof field[i].formula === "function") {
-                        num = field[i].formula(data);
+                        num = field[i].formula(data, true);
                     } else if (typeof data[field[i].dataIndex] !== "undefined") {
                         num = data[field[i].dataIndex];
                     }
