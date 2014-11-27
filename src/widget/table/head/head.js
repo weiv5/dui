@@ -44,7 +44,6 @@ define([
                 left = me.table.xtbl.left(),
                 htop = me.top,
                 btop = me.box.height();
-            console.log(btop);
             doc.bind("scroll", function() {
                 var t = doc.scrollTop(),
                     h = hide + me.table.box.height();

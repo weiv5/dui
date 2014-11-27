@@ -1,6 +1,8 @@
 define(function() {
     return {
         add : function(a, b) {
+            a = parseFloat(a);
+            b = parseFloat(b);
             var f1 = a%1,
                 f2 = b%1;
             if (f1===0 && f2===0) {
