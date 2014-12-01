@@ -83,10 +83,10 @@ define([
             }
             thead.append(tr2);
 
-            var container = me.table.createTblDom();
-            container.box.append(colgroup);
-            container.box.append(thead);
-            box.append(container.xtbl);
+            var container = new Core.dom("table");
+            container.append(colgroup);
+            container.append(thead);
+            box.append(container);
         },
         bindEvent : function(idx) {
             var me = this;

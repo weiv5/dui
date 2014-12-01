@@ -27,14 +27,6 @@ define([
             me.body.render(me.box);
         },
         createBox : function() {
-            var me = this;
-
-            var container = me.createTblDom();
-            me.outer.append(container.xtbl);
-            me.xtbl = container.xtbl;
-            me.box = container.box;
-        },
-        createTblDom : function() {
             var me = this,
                 xtbl = new Core.dom("div"),
                 content = new Core.dom("div"),
@@ -49,8 +41,10 @@ define([
             content.addClass(Core.css.table.content);
             content.append(box);
 
-            return {xtbl:xtbl, box:box};
-        }
+            me.outer.append(xtbl);
+            me.xtbl = xtbl;
+            me.box = box;
+        },
     };
     Core.extend({
         table : Table
